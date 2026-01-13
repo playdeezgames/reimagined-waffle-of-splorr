@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="ImageGenerator/ImageGenerator.vbproj" Id="a4a36205-9813-4469-921c-cc797d511524" />
+  <Project Path="ReimagineWaffleOfSplorr/ReimagineWaffleOfSplorr.csproj" />
+  <Project Path="RWOS.UI/RWOS.UI.vbproj" />
+  <Project Path="TGGD.UI/TGGD.UI.vbproj" />
+</Solution>

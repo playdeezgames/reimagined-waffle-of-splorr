@@ -1,0 +1,41 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Reimagined Waffle of SPLORR!!</PageTitle>
+<table class="screen1-table" tabindex="1" @onkeydown="HandleKeyDownAsync" @onkeydown:preventDefault="ShouldPreventDefault" autofocus>
+	@foreach (var row in Enumerable.Range(0, VIEW_ROWS))
+	{
+		<tr>
+			@foreach (var column in Enumerable.Range(0, VIEW_COLUMNS))
+			{
+				<td class="screen1-td" style="background-position: @GetBackgroundPosition(column, row)"></td>
+			}
+		</tr>
+	}
+</table>
+@code{
+	const int VIEW_COLUMNS = 80;
+	const int VIEW_ROWS = 200;
+	const int CELL_COLUMNS = 16;
+	const int CELL_WIDTH = 16;
+	const int CELL_HEIGHT = 4;
+	static byte[] FrameBuffer = Enumerable.Repeat<byte>(0,VIEW_COLUMNS * VIEW_ROWS).ToArray();
+	IUIContext uiContext = new UIContext(new FourColorPixelBuffer(FrameBuffer,320,200));
+	private bool ShouldPreventDefault = false;
+	private async Task HandleKeyDownAsync(KeyboardEventArgs args)
+	{
+		ShouldPreventDefault = true;
+	}
+	string GetBackgroundPosition(int column, int row)
+	{
+		int character = FrameBuffer[column + row * VIEW_COLUMNS];
+		int characterX = -(character % CELL_COLUMNS) * CELL_WIDTH;
+		int characterY = -(character / CELL_COLUMNS) * CELL_HEIGHT;
+		return $"{characterX}px {characterY}px";
+	}
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+		uiContext.Refresh();
+	}
+}
