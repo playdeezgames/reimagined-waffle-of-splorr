@@ -2,8 +2,9 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
-  <Project Path="ImageGenerator/ImageGenerator.vbproj" Id="a4a36205-9813-4469-921c-cc797d511524" />
-  <Project Path="ReimagineWaffleOfSplorr/ReimagineWaffleOfSplorr.csproj" />
+  <Folder Name="/Utility/" />
+  <Project Path="ReimaginedWaffleOfSplorr/ReimaginedWaffleOfSplorr.vbproj" Id="bec4ac61-9699-4aa5-9b03-0169e7088d12" />
   <Project Path="RWOS.UI/RWOS.UI.vbproj" />
+  <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="4d6d5a21-a8e2-4b91-9bf7-5c65ba5293d3" />
   <Project Path="TGGD.UI/TGGD.UI.vbproj" />
 </Solution>
