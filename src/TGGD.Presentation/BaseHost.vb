@@ -52,10 +52,14 @@ Public MustInherit Class BaseHost(Of THue)
 
     Protected Overrides Sub Update(gameTime As GameTime)
         MyBase.Update(gameTime)
-        Dim newState = Keyboard.GetState()
+        Dim keyboardState = Keyboard.GetState()
         Dim commands As New HashSet(Of String)
-        For Each pressedKey In [Enum].GetValues(Of Keys)()
-            CheckForCommands(commands, newState.IsKeyDown(pressedKey), pressedKey.ToString)
+        For Each key In [Enum].GetValues(Of Keys)()
+            CheckForCommands(commands, keyboardState.IsKeyDown(key), $"Key{key.ToString}")
+        Next
+        Dim gamepadState = GamePad.GetState(PlayerIndex.One)
+        For Each button In [Enum].GetValues(Of Buttons)()
+            CheckForCommands(commands, gamepadState.IsButtonDown(button), $"Button{button.ToString}")
         Next
         For Each cmd In commands
             _ui.HandleCommand(cmd)

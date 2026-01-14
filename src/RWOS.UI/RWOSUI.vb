@@ -46,13 +46,13 @@ Public Class RWOSUI
         Dim next_column = player_column
         Dim next_row = player_row
         Select Case cmd
-            Case "Up"
+            Case "KeyUp", "ButtonDPadUp"
                 next_row -= 1
-            Case "Right"
+            Case "KeyRight", "ButtonDPadRight"
                 next_column += 1
-            Case "Down"
+            Case "KeyDown", "ButtonDPadDown"
                 next_row += 1
-            Case "Left"
+            Case "KeyLeft", "ButtonDPadLeft"
                 next_column -= 1
         End Select
         If GetCell(next_column, next_row) = CGAHue.BLACK Then
