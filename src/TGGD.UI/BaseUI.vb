@@ -16,4 +16,5 @@
     Public MustOverride Sub Update(
                                   pixelSink As IPixelSink(Of THue),
                                   elapsedTime As TimeSpan) Implements IUI(Of THue).Update
+    Public MustOverride Sub HandleCommand(cmd As String) Implements IUI(Of THue).HandleCommand
 End Class

@@ -1,5 +1,6 @@
 Imports Microsoft.Xna.Framework
 Imports Microsoft.Xna.Framework.Graphics
+Imports Microsoft.Xna.Framework.Input
 Imports TGGD.UI
 
 Public MustInherit Class BaseHost(Of THue)
@@ -50,6 +51,14 @@ Public MustInherit Class BaseHost(Of THue)
 
     Protected Overrides Sub Update(gameTime As GameTime)
         MyBase.Update(gameTime)
+        Dim newState = Keyboard.GetState()
+        Dim commands As New HashSet(Of String)
+        For Each pressedKey In [Enum].GetValues(Of Keys)()
+            CheckForCommands(commands, newState.IsKeyDown(pressedKey), pressedKey.ToString)
+        Next
+        For Each cmd In commands
+            _ui.HandleCommand(cmd)
+        Next
         _ui.Update(_displayBuffer, gameTime.ElapsedGameTime)
         _displayBuffer.Commit()
     End Sub
@@ -60,5 +69,22 @@ Public MustInherit Class BaseHost(Of THue)
         _spriteBatch.Draw(_texture, New Rectangle(0, 0, 1280, 800), Nothing, Color.White)
         _spriteBatch.End()
         MyBase.Draw(gameTime)
+    End Sub
+
+    Private ReadOnly _nextCommandTimes As New Dictionary(Of String, DateTimeOffset)
+    Private Sub CheckForCommands(commands As HashSet(Of String), isPressed As Boolean, command As String)
+        If isPressed Then
+            If _nextCommandTimes.ContainsKey(command) Then
+                If DateTimeOffset.Now > _nextCommandTimes(command) Then
+                    commands.Add(command)
+                    _nextCommandTimes(command) = DateTimeOffset.Now.AddSeconds(0.3)
+                End If
+            Else
+                commands.Add(command)
+                _nextCommandTimes(command) = DateTimeOffset.Now.AddSeconds(1.0)
+            End If
+        Else
+            _nextCommandTimes.Remove(command)
+        End If
     End Sub
 End Class
