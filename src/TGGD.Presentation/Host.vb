@@ -12,18 +12,16 @@ Public MustInherit Class Host(Of THue)
     Private _ui As IUI(Of THue)
     Private ReadOnly Property ScreenWidth As Integer
         Get
-            Return ViewWidth * ScaleX
+            Return _ui.ViewWidth * ScaleX
         End Get
     End Property
     Private ReadOnly Property ScreenHeight As Integer
         Get
-            Return ViewHeight * ScaleY
+            Return _ui.ViewHeight * ScaleY
         End Get
     End Property
     Protected MustOverride ReadOnly Property ScaleX As Integer
     Protected MustOverride ReadOnly Property ScaleY As Integer
-    Protected MustOverride ReadOnly Property ViewWidth As Integer
-    Protected MustOverride ReadOnly Property ViewHeight As Integer
     Protected MustOverride ReadOnly Property FullScreen As Boolean
     Protected MustOverride Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of THue)
 
@@ -48,7 +46,7 @@ Public MustInherit Class Host(Of THue)
 
     Protected Overrides Sub LoadContent()
         _spriteBatch = New SpriteBatch(GraphicsDevice)
-        _texture = New Texture2D(GraphicsDevice, ViewWidth, ViewHeight)
+        _texture = New Texture2D(GraphicsDevice, _ui.ViewWidth, _ui.ViewHeight)
         _displayBuffer = CreateDisplayBuffer(_texture)
     End Sub
 

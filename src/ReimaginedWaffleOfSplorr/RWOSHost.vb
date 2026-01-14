@@ -16,18 +16,6 @@ Friend Class RWOSHost
         End Get
     End Property
 
-    Protected Overrides ReadOnly Property ViewWidth As Integer 'TODO: push down into ui
-        Get
-            Return 320
-        End Get
-    End Property
-
-    Protected Overrides ReadOnly Property ViewHeight As Integer 'TODO: push down into ui
-        Get
-            Return 200
-        End Get
-    End Property
-
     Protected Overrides ReadOnly Property ScaleX As Integer
         Get
             Return 4
