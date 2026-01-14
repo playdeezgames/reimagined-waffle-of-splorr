@@ -9,14 +9,26 @@ Public MustInherit Class Host(Of THue)
     Private _texture As Texture2D
     Private _spriteBatch As SpriteBatch
     Private _displayBuffer As IPixelSink(Of THue)
-    Protected MustOverride ReadOnly Property ScreenWidth As Integer
-    Protected MustOverride ReadOnly Property ScreenHeight As Integer
+    Private _ui As IUI(Of THue)
+    Private ReadOnly Property ScreenWidth As Integer
+        Get
+            Return ViewWidth * ScaleX
+        End Get
+    End Property
+    Private ReadOnly Property ScreenHeight As Integer
+        Get
+            Return ViewHeight * ScaleY
+        End Get
+    End Property
+    Protected MustOverride ReadOnly Property ScaleX As Integer
+    Protected MustOverride ReadOnly Property ScaleY As Integer
     Protected MustOverride ReadOnly Property ViewWidth As Integer
     Protected MustOverride ReadOnly Property ViewHeight As Integer
     Protected MustOverride ReadOnly Property FullScreen As Boolean
     Protected MustOverride Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of THue)
 
-    Sub New()
+    Sub New(ui As IUI(Of THue))
+        _ui = ui
         _graphics = New GraphicsDeviceManager(Me)
         Content.RootDirectory = "Content"
         IsMouseVisible = False
@@ -42,11 +54,9 @@ Public MustInherit Class Host(Of THue)
 
     Protected Overrides Sub Update(gameTime As GameTime)
         MyBase.Update(gameTime)
-        Refresh(_displayBuffer, gameTime.ElapsedGameTime)
+        _ui.Update(_displayBuffer, gameTime.ElapsedGameTime)
         _displayBuffer.Commit()
     End Sub
-
-    Protected MustOverride Sub Refresh(pixelSink As IPixelSink(Of THue), elapsedTime As TimeSpan)
 
     Protected Overrides Sub Draw(gameTime As GameTime)
         GraphicsDevice.Clear(Color.Black)

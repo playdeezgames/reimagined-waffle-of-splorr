@@ -6,17 +6,9 @@ Imports TGGD.UI
 Friend Class RWOSHost
     Inherits Host(Of CGAHue)
 
-    Protected Overrides ReadOnly Property ScreenWidth As Integer
-        Get
-            Return 1280
-        End Get
-    End Property
-
-    Protected Overrides ReadOnly Property ScreenHeight As Integer
-        Get
-            Return 800
-        End Get
-    End Property
+    Public Sub New()
+        MyBase.New(New RWOSUI)
+    End Sub
 
     Protected Overrides ReadOnly Property FullScreen As Boolean
         Get
@@ -24,21 +16,29 @@ Friend Class RWOSHost
         End Get
     End Property
 
-    Protected Overrides ReadOnly Property ViewWidth As Integer
+    Protected Overrides ReadOnly Property ViewWidth As Integer 'TODO: push down into ui
         Get
             Return 320
         End Get
     End Property
 
-    Protected Overrides ReadOnly Property ViewHeight As Integer
+    Protected Overrides ReadOnly Property ViewHeight As Integer 'TODO: push down into ui
         Get
             Return 200
         End Get
     End Property
 
-    Protected Overrides Sub Refresh(pixelSink As IPixelSink(Of CGAHue), elapsedTime As TimeSpan)
-        'TODO: move to UI context
-    End Sub
+    Protected Overrides ReadOnly Property ScaleX As Integer
+        Get
+            Return 4
+        End Get
+    End Property
+
+    Protected Overrides ReadOnly Property ScaleY As Integer
+        Get
+            Return 4
+        End Get
+    End Property
 
     Protected Overrides Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of CGAHue)
         Return New DisplayBuffer(texture)
