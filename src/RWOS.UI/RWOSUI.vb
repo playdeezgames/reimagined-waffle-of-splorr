@@ -1,7 +1,7 @@
 ﻿Imports TGGD.UI
 
 Public Class RWOSUI
-    Inherits BaseUI(Of CGAHue)
+    Inherits BaseRWOSUI
     Const CELL_COLUMNS = 40
     Const CELL_ROWS = 25
     Const CELL_WIDTH = 8
@@ -10,9 +10,9 @@ Public Class RWOSUI
     Private player_column As Integer = CELL_COLUMNS \ 2
     Private player_row As Integer = CELL_ROWS \ 2
     Private ReadOnly grid As List(Of CGAHue) = Enumerable.Repeat(CGAHue.BLACK, CELL_COLUMNS * CELL_ROWS).ToList()
-    Private ReadOnly _settings As IHostSettings
-    Sub New(settings As IHostSettings)
-        Me._settings = settings
+
+    Sub New(controls As IHostControls)
+        MyBase.New(controls)
         For Each column In Enumerable.Range(0, CELL_COLUMNS)
             SetCell(column, 0, CGAHue.CYAN)
             SetCell(column, CELL_ROWS - 1, CGAHue.CYAN)
@@ -28,7 +28,9 @@ Public Class RWOSUI
         grid(column + row * CELL_COLUMNS) = hue
     End Sub
 
-    Public Overrides Sub Update(pixelSink As IPixelSink(Of CGAHue), elapsedTime As TimeSpan)
+    Public Overrides Sub Update(
+                               pixelSink As IPixelSink(Of CGAHue),
+                               elapsedTime As TimeSpan)
         pixelSink.Fill(0, 0, pixelSink.Columns, pixelSink.Rows, CGAHue.BLACK)
         For Each column In Enumerable.Range(0, CELL_COLUMNS)
             For Each row In Enumerable.Range(0, CELL_ROWS)
@@ -41,7 +43,7 @@ Public Class RWOSUI
         Return grid(column + row * CELL_COLUMNS)
     End Function
 
-    Public Overrides Sub HandleCommand(cmd As String)
+    Public Overrides Function HandleCommand(cmd As String) As IUI(Of CGAHue)
         SetCell(player_column, player_row, CGAHue.BLACK)
         Dim next_column = player_column
         Dim next_row = player_row
@@ -54,11 +56,19 @@ Public Class RWOSUI
                 next_row += 1
             Case "KeyLeft", "ButtonDPadLeft"
                 next_column -= 1
+            Case "ButtonA", "KeySpace"
+            Case "ButtonB", "KeyEscape"
+            Case "ButtonBack", "KeyTab"
+            Case "ButtonStart", "KeyEnter"
         End Select
         If GetCell(next_column, next_row) = CGAHue.BLACK Then
             player_column = next_column
             player_row = next_row
+            Controls.PlaySfx(Sfx.PlayerStep)
+        Else
+            Controls.PlaySfx(Sfx.HitWall)
         End If
         SetCell(player_column, player_row, CGAHue.MAGENTA)
-    End Sub
+        Return Me
+    End Function
 End Class

@@ -9,22 +9,24 @@ Public MustInherit Class BaseHost(Of THue)
     Private _texture As Texture2D
     Private _spriteBatch As SpriteBatch
     Private _displayBuffer As IPixelSink(Of THue)
-    Private ReadOnly _settings As IHostSettingSource
+    Private ReadOnly _controls As IHostControls
     Private ReadOnly _ui As IUI(Of THue)
     Private ReadOnly Property ScreenWidth As Integer
         Get
-            Return _ui.ViewWidth * _settings.ScaleX
+            Return _ui.ViewWidth * _controls.ScaleX
         End Get
     End Property
     Private ReadOnly Property ScreenHeight As Integer
         Get
-            Return _ui.ViewHeight * _settings.ScaleY
+            Return _ui.ViewHeight * _controls.ScaleY
         End Get
     End Property
     Protected MustOverride Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of THue)
 
-    Sub New(settings As IHostSettingSource, ui As IUI(Of THue))
-        _settings = settings
+    Sub New(
+           settings As IHostControls,
+           ui As IUI(Of THue))
+        _controls = settings
         _ui = ui
         _graphics = New GraphicsDeviceManager(Me)
         Content.RootDirectory = "Content"
@@ -34,13 +36,13 @@ Public MustInherit Class BaseHost(Of THue)
     Private Sub ApplySettings()
         _graphics.PreferredBackBufferWidth = ScreenWidth
         _graphics.PreferredBackBufferHeight = ScreenHeight
-        _graphics.IsFullScreen = _settings.FullScreen
+        _graphics.IsFullScreen = _controls.FullScreen
         _graphics.ApplyChanges()
     End Sub
 
     Protected Overrides Sub Initialize()
         MyBase.Initialize()
-        AddHandler _settings.OnCommit, AddressOf ApplySettings
+        AddHandler _controls.OnCommit, AddressOf ApplySettings
         ApplySettings()
     End Sub
 
@@ -55,11 +57,11 @@ Public MustInherit Class BaseHost(Of THue)
         Dim keyboardState = Keyboard.GetState()
         Dim commands As New HashSet(Of String)
         For Each key In [Enum].GetValues(Of Keys)()
-            CheckForCommands(commands, keyboardState.IsKeyDown(key), $"Key{key.ToString}")
+            CheckForCommands(commands, keyboardState.IsKeyDown(key), $"Key{key}")
         Next
         Dim gamepadState = GamePad.GetState(PlayerIndex.One)
         For Each button In [Enum].GetValues(Of Buttons)()
-            CheckForCommands(commands, gamepadState.IsButtonDown(button), $"Button{button.ToString}")
+            CheckForCommands(commands, gamepadState.IsButtonDown(button), $"Button{button}")
         Next
         For Each cmd In commands
             _ui.HandleCommand(cmd)

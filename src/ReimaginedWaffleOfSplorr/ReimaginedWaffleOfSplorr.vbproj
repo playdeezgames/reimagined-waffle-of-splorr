@@ -16,6 +16,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Content\Audio\Sfx\HitWall.wav" />
+    <None Remove="Content\Audio\Sfx\PlayerStep.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Content\Audio\Sfx\HitWall.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\Sfx\PlayerStep.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RWOS.UI\RWOS.UI.vbproj" />
     <ProjectReference Include="..\TGGD.Presentation\TGGD.Presentation.vbproj" />
   </ItemGroup>

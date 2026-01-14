@@ -6,7 +6,7 @@ Imports TGGD.UI
 Friend Class RWOSHost
     Inherits BaseHost(Of CGAHue)
 
-    Public Sub New(settings As RWOSHostSettings)
+    Public Sub New(settings As RWOSHostControls)
         MyBase.New(settings, New RWOSUI(settings))
     End Sub
 
