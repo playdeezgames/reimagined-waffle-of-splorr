@@ -1,7 +1,9 @@
-﻿Imports TGGD.Presentation
+﻿Imports RWOS.UI
+Imports TGGD.Presentation
 
 Friend Class RWOSHostSettings
-    Implements IHostSettingSource
+    Implements IHostSettings, IHostSettingSource
+    Public Property FullScreen As Boolean Implements IHostSettings.FullScreen
 
     Public ReadOnly Property ScaleX As Integer Implements IHostSettingSource.ScaleX
         Get
@@ -15,9 +17,15 @@ Friend Class RWOSHostSettings
         End Get
     End Property
 
-    Public ReadOnly Property FullScreen As Boolean Implements IHostSettingSource.FullScreen
+    Private ReadOnly Property IHostSettingSource_FullScreen As Boolean Implements IHostSettingSource.FullScreen
         Get
-            Return False
+            Return FullScreen
         End Get
     End Property
+
+    Public Event OnCommit() Implements IHostSettingSource.OnCommit
+
+    Public Sub Commit() Implements IHostSettings.Commit
+        RaiseEvent OnCommit()
+    End Sub
 End Class

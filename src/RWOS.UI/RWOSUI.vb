@@ -9,9 +9,10 @@ Public Class RWOSUI
 
     Private player_column As Integer = CELL_COLUMNS \ 2
     Private player_row As Integer = CELL_ROWS \ 2
-    Private grid As List(Of CGAHue) = Enumerable.Repeat(CGAHue.BLACK, CELL_COLUMNS * CELL_ROWS).ToList()
-
-    Sub New()
+    Private ReadOnly grid As List(Of CGAHue) = Enumerable.Repeat(CGAHue.BLACK, CELL_COLUMNS * CELL_ROWS).ToList()
+    Private ReadOnly _settings As IHostSettings
+    Sub New(settings As IHostSettings)
+        Me._settings = settings
         For Each column In Enumerable.Range(0, CELL_COLUMNS)
             SetCell(column, 0, CGAHue.CYAN)
             SetCell(column, CELL_ROWS - 1, CGAHue.CYAN)

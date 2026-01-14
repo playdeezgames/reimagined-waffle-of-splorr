@@ -31,7 +31,7 @@ Public MustInherit Class BaseHost(Of THue)
         IsMouseVisible = False
     End Sub
 
-    Private Sub UpdateDisplay()
+    Private Sub ApplySettings()
         _graphics.PreferredBackBufferWidth = ScreenWidth
         _graphics.PreferredBackBufferHeight = ScreenHeight
         _graphics.IsFullScreen = _settings.FullScreen
@@ -40,7 +40,8 @@ Public MustInherit Class BaseHost(Of THue)
 
     Protected Overrides Sub Initialize()
         MyBase.Initialize()
-        UpdateDisplay()
+        AddHandler _settings.OnCommit, AddressOf ApplySettings
+        ApplySettings()
     End Sub
 
     Protected Overrides Sub LoadContent()

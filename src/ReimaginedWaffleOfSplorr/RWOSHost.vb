@@ -6,8 +6,8 @@ Imports TGGD.UI
 Friend Class RWOSHost
     Inherits BaseHost(Of CGAHue)
 
-    Public Sub New()
-        MyBase.New(New RWOSHostSettings, New RWOSUI)
+    Public Sub New(settings As RWOSHostSettings)
+        MyBase.New(settings, New RWOSUI(settings))
     End Sub
 
     Protected Overrides Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of CGAHue)
