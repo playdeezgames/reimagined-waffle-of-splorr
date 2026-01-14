@@ -8,23 +8,22 @@ Public MustInherit Class BaseHost(Of THue)
     Private _texture As Texture2D
     Private _spriteBatch As SpriteBatch
     Private _displayBuffer As IPixelSink(Of THue)
+    Private ReadOnly _settings As IHostSettings
     Private ReadOnly _ui As IUI(Of THue)
     Private ReadOnly Property ScreenWidth As Integer
         Get
-            Return _ui.ViewWidth * ScaleX
+            Return _ui.ViewWidth * _settings.ScaleX
         End Get
     End Property
     Private ReadOnly Property ScreenHeight As Integer
         Get
-            Return _ui.ViewHeight * ScaleY
+            Return _ui.ViewHeight * _settings.ScaleY
         End Get
     End Property
-    Protected MustOverride ReadOnly Property ScaleX As Integer 'TODO: push down into presentation settings
-    Protected MustOverride ReadOnly Property ScaleY As Integer 'TODO: push down into presentation settings
-    Protected MustOverride ReadOnly Property FullScreen As Boolean 'TODO: push down into presentation settings
     Protected MustOverride Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of THue)
 
-    Sub New(ui As IUI(Of THue))
+    Sub New(settings As IHostSettings, ui As IUI(Of THue))
+        _settings = settings
         _ui = ui
         _graphics = New GraphicsDeviceManager(Me)
         Content.RootDirectory = "Content"
@@ -34,7 +33,7 @@ Public MustInherit Class BaseHost(Of THue)
     Private Sub UpdateDisplay()
         _graphics.PreferredBackBufferWidth = ScreenWidth
         _graphics.PreferredBackBufferHeight = ScreenHeight
-        _graphics.IsFullScreen = FullScreen
+        _graphics.IsFullScreen = _settings.FullScreen
         _graphics.ApplyChanges()
     End Sub
 
