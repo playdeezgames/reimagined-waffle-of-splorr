@@ -4,7 +4,7 @@ Imports TGGD.Presentation
 Imports TGGD.UI
 
 Friend Class RWOSHost
-    Inherits Host(Of CGAHue)
+    Inherits BaseHost(Of CGAHue)
 
     Public Sub New()
         MyBase.New(New RWOSUI)

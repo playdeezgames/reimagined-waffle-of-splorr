@@ -1,15 +1,14 @@
-Imports System.ComponentModel
 Imports Microsoft.Xna.Framework
 Imports Microsoft.Xna.Framework.Graphics
 Imports TGGD.UI
 
-Public MustInherit Class Host(Of THue)
+Public MustInherit Class BaseHost(Of THue)
     Inherits Game
     Private ReadOnly _graphics As GraphicsDeviceManager
     Private _texture As Texture2D
     Private _spriteBatch As SpriteBatch
     Private _displayBuffer As IPixelSink(Of THue)
-    Private _ui As IUI(Of THue)
+    Private ReadOnly _ui As IUI(Of THue)
     Private ReadOnly Property ScreenWidth As Integer
         Get
             Return _ui.ViewWidth * ScaleX
@@ -20,9 +19,9 @@ Public MustInherit Class Host(Of THue)
             Return _ui.ViewHeight * ScaleY
         End Get
     End Property
-    Protected MustOverride ReadOnly Property ScaleX As Integer
-    Protected MustOverride ReadOnly Property ScaleY As Integer
-    Protected MustOverride ReadOnly Property FullScreen As Boolean
+    Protected MustOverride ReadOnly Property ScaleX As Integer 'TODO: push down into presentation settings
+    Protected MustOverride ReadOnly Property ScaleY As Integer 'TODO: push down into presentation settings
+    Protected MustOverride ReadOnly Property FullScreen As Boolean 'TODO: push down into presentation settings
     Protected MustOverride Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of THue)
 
     Sub New(ui As IUI(Of THue))
