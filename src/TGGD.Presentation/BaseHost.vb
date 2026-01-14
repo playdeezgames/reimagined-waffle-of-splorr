@@ -8,7 +8,7 @@ Public MustInherit Class BaseHost(Of THue)
     Private _texture As Texture2D
     Private _spriteBatch As SpriteBatch
     Private _displayBuffer As IPixelSink(Of THue)
-    Private ReadOnly _settings As IHostSettings
+    Private ReadOnly _settings As IHostSettingSource
     Private ReadOnly _ui As IUI(Of THue)
     Private ReadOnly Property ScreenWidth As Integer
         Get
@@ -22,7 +22,7 @@ Public MustInherit Class BaseHost(Of THue)
     End Property
     Protected MustOverride Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of THue)
 
-    Sub New(settings As IHostSettings, ui As IUI(Of THue))
+    Sub New(settings As IHostSettingSource, ui As IUI(Of THue))
         _settings = settings
         _ui = ui
         _graphics = New GraphicsDeviceManager(Me)
