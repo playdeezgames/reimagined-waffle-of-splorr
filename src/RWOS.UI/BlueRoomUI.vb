@@ -41,6 +41,7 @@ Public Class BlueRoomUI
                 Model.Move(Direction.West)
             Case "ButtonA", "KeySpace"
             Case "ButtonB", "KeyEscape"
+                Return New MainMenuUI(Controls, Model)
             Case "ButtonBack", "KeyTab"
             Case "ButtonStart", "KeyEnter"
         End Select

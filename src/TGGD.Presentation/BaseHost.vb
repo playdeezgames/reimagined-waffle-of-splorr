@@ -11,7 +11,7 @@ Public MustInherit Class BaseHost(Of THue)
     Private _displayBuffer As IPixelSink(Of THue)
     Private ReadOnly _title As String
     Private ReadOnly _controls As IHostControls
-    Private ReadOnly _ui As IUI(Of THue)
+    Private _ui As IUI(Of THue)
     Private ReadOnly Property ScreenWidth As Integer
         Get
             Return _ui.ViewWidth * _controls.ScaleX
@@ -68,7 +68,7 @@ Public MustInherit Class BaseHost(Of THue)
             CheckForCommands(commands, gamepadState.IsButtonDown(button), $"Button{button}")
         Next
         For Each cmd In commands
-            _ui.HandleCommand(cmd)
+            _ui = _ui.HandleCommand(cmd)
         Next
         _ui.Update(_displayBuffer, gameTime.ElapsedGameTime)
         _displayBuffer.Commit()
