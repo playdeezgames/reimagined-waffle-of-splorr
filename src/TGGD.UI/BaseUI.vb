@@ -1,9 +1,11 @@
-﻿Public MustInherit Class BaseUI(Of THue)
+﻿Public MustInherit Class BaseUI(Of THue, TModel)
     Implements IUI(Of THue)
     Protected ReadOnly Controls As IHostControls
+    Protected ReadOnly Model As TModel
 
-    Public Sub New(controls As IHostControls)
+    Public Sub New(controls As IHostControls, model As TModel)
         Me.Controls = controls
+        Me.Model = model
     End Sub
 
     Public MustOverride ReadOnly Property ViewWidth As Integer Implements IUI(Of THue).ViewWidth

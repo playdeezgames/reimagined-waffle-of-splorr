@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>RWOS.UI</RootNamespace>
+    <RootNamespace>RWOS.Model</RootNamespace>
     <TargetFramework>net10.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
@@ -13,10 +13,5 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RWOS.Model\RWOS.Model.vbproj" />
-    <ProjectReference Include="..\TGGD.UI\TGGD.UI.vbproj" />
-  </ItemGroup>
 
 </Project>

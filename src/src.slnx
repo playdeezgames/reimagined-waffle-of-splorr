@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/Utility/" />
   <Project Path="ReimaginedWaffleOfSplorr/ReimaginedWaffleOfSplorr.vbproj" Id="bec4ac61-9699-4aa5-9b03-0169e7088d12" />
+  <Project Path="RWOS.Model/RWOS.Model.vbproj" Id="75cfe884-2d37-493c-a2ef-f12bb48e2d22" />
   <Project Path="RWOS.UI/RWOS.UI.vbproj" />
   <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="4d6d5a21-a8e2-4b91-9bf7-5c65ba5293d3" />
   <Project Path="TGGD.UI/TGGD.UI.vbproj" />
