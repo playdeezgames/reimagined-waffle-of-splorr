@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Xna.Framework.Audio
+Imports RWOS.Model
 Imports RWOS.UI
 Imports TGGD.UI
 
@@ -7,8 +8,8 @@ Friend Class RWOSHostControls
     Private ReadOnly sfxFilenames As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From
         {
-            {Sfx.HitWall, "Content/Audio/Sfx/HitWall.wav"},
-            {Sfx.PlayerStep, "Content/Audio/Sfx/PlayerStep.wav"}
+            {Cues.HitWall.ToString, "Content/Audio/Sfx/HitWall.wav"},
+            {Cues.PlayerStep.ToString, "Content/Audio/Sfx/PlayerStep.wav"}
         }
     Private sfxTable As New Dictionary(Of String, SoundEffect)
 

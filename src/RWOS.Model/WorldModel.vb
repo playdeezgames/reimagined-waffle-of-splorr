@@ -1,4 +1,4 @@
-Public Class WorldModel
+Public MustInherit Class WorldModel
     Implements IWorldModel
     Const CELL_COLUMNS = 40
     Const CELL_ROWS = 25
@@ -19,7 +19,7 @@ Public Class WorldModel
         End Get
     End Property
 
-    Private Sub New()
+    Protected Sub New()
         For Each column In Enumerable.Range(0, CELL_COLUMNS)
             SetCell(column, 0, CellType.WALL)
             SetCell(column, CELL_ROWS - 1, CellType.WALL)
@@ -34,10 +34,6 @@ Public Class WorldModel
     Private Sub SetCell(column As Integer, row As Integer, cellType As CellType)
         grid(column + row * CELL_COLUMNS) = cellType
     End Sub
-
-    Public Shared Function Create() As IWorldModel
-        Return New WorldModel
-    End Function
 
     Public Function GetCell(column As Integer, row As Integer) As CellType Implements IWorldModel.GetCell
         Return grid(column + row * CELL_COLUMNS)
@@ -60,10 +56,12 @@ Public Class WorldModel
         If GetCell(next_column, next_row) = CellType.FLOOR Then
             player_column = next_column
             player_row = next_row
-            'Controls.PlaySfx(Sfx.PlayerStep)
+            HandleCue(Cues.PlayerStep)
         Else
-            'Controls.PlaySfx(Sfx.HitWall)
+            HandleCue(Cues.HitWall)
         End If
         SetCell(player_column, player_row, CellType.N00B)
     End Sub
+
+    Protected MustOverride Sub HandleCue(cue As Cues)
 End Class

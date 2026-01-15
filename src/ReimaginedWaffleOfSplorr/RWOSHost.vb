@@ -7,8 +7,8 @@ Imports TGGD.UI
 Friend Class RWOSHost
     Inherits BaseHost(Of CGAHue)
 
-    Public Sub New(settings As RWOSHostControls)
-        MyBase.New(settings, New BlueRoomUI(settings, WorldModel.Create()))
+    Public Sub New(controls As RWOSHostControls)
+        MyBase.New(controls, New BlueRoomUI(controls, New RWOSWorldModel(controls)))
     End Sub
 
     Protected Overrides Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of CGAHue)
