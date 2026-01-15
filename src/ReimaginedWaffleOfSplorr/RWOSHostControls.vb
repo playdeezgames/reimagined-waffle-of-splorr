@@ -1,4 +1,6 @@
-﻿Imports Microsoft.Xna.Framework.Audio
+﻿Imports System.IO
+Imports System.Text.Json
+Imports Microsoft.Xna.Framework.Audio
 Imports RWOS.Model
 Imports RWOS.UI
 Imports TGGD.UI
@@ -11,7 +13,13 @@ Friend Class RWOSHostControls
             {Cues.HitWall.ToString, "Content/Audio/Sfx/HitWall.wav"},
             {Cues.PlayerStep.ToString, "Content/Audio/Sfx/PlayerStep.wav"}
         }
-    Private sfxTable As New Dictionary(Of String, SoundEffect)
+    Private ReadOnly sfxTable As New Dictionary(Of String, SoundEffect)
+    Private ReadOnly fontFileNames As IReadOnlyDictionary(Of String, String) =
+        New Dictionary(Of String, String) From
+        {
+            {Fonts.RomFont8x8, "Content/Fonts/CyFont8x8.json"}
+        }
+    Private ReadOnly fontTable As New Dictionary(Of String, IFont)
 
     Sub New()
         ScaleX = 4
@@ -40,4 +48,16 @@ Friend Class RWOSHostControls
         End If
         effect?.Play()
     End Sub
+
+    Public Function GetFont(fontName As String) As IFont Implements IHostControls.GetFont
+        Dim font As IFont = Nothing
+        If Not fontTable.TryGetValue(fontName, font) Then
+            Dim filename As String = Nothing
+            If fontFileNames.TryGetValue(fontName, filename) Then
+                font = New Font(JsonSerializer.Deserialize(Of FontData)(File.ReadAllText(filename)))
+                fontTable(fontName) = font
+            End If
+        End If
+        Return font
+    End Function
 End Class

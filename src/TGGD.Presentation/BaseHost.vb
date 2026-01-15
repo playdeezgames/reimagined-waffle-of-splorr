@@ -9,6 +9,7 @@ Public MustInherit Class BaseHost(Of THue)
     Private _texture As Texture2D
     Private _spriteBatch As SpriteBatch
     Private _displayBuffer As IPixelSink(Of THue)
+    Private ReadOnly _title As String
     Private ReadOnly _controls As IHostControls
     Private ReadOnly _ui As IUI(Of THue)
     Private ReadOnly Property ScreenWidth As Integer
@@ -24,8 +25,10 @@ Public MustInherit Class BaseHost(Of THue)
     Protected MustOverride Function CreateDisplayBuffer(texture As Texture2D) As IPixelSink(Of THue)
 
     Sub New(
+           title As String,
            settings As IHostControls,
            ui As IUI(Of THue))
+        _title = title
         _controls = settings
         _ui = ui
         _graphics = New GraphicsDeviceManager(Me)
@@ -42,6 +45,7 @@ Public MustInherit Class BaseHost(Of THue)
 
     Protected Overrides Sub Initialize()
         MyBase.Initialize()
+        Window.Title = _title
         AddHandler _controls.OnCommit, AddressOf ApplySettings
         ApplySettings()
     End Sub

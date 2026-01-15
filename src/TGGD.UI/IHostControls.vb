@@ -5,4 +5,5 @@
     Sub Commit()
     Event OnCommit()
     Sub PlaySfx(sfx As String)
+    Function GetFont(fontName As String) As IFont
 End Interface
