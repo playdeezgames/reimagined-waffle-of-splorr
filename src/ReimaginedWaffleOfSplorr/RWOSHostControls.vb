@@ -17,7 +17,10 @@ Friend Class RWOSHostControls
     Private ReadOnly fontFileNames As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From
         {
-            {Fonts.RomFont8x8, "Content/Fonts/CyFont8x8.json"}
+            {Fonts.RomFont8x8, "Content/Fonts/CyFont8x8.json"},
+            {Fonts.RomFont5x7, "Content/Fonts/CyFont5x7.json"},
+            {Fonts.RomFont4x6, "Content/Fonts/CyFont4x6.json"},
+            {Fonts.RomFont3x5, "Content/Fonts/CyFont3x5.json"}
         }
     Private ReadOnly fontTable As New Dictionary(Of String, IFont)
 
