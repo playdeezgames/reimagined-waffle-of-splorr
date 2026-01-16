@@ -30,17 +30,18 @@ Friend Class MainMenuUI
         menu.Draw(font, pixelSink)
     End Sub
 
-    Public Overrides Function HandleCommand(cmd As String) As IUI(Of CGAHue)
+    Protected Overrides Function HandleUICommand(cmd As UICommand) As IUI(Of CGAHue)
+        Dim result As IUI(Of CGAHue) = Nothing
         Select Case cmd
-            Case "KeyUp", "ButtonDPadUp"
-                Return If(menu.HandleCommand(MenuCommand.PreviousItem), Me)
-            Case "KeyDown", "ButtonDPadDown"
-                Return If(menu.HandleCommand(MenuCommand.NextItem), Me)
-            Case "ButtonA", "KeySpace"
-                Return If(menu.HandleCommand(MenuCommand.Choose), Me)
-            Case "ButtonB", "KeyEscape"
-                Return If(menu.HandleCommand(MenuCommand.Cancel), Me)
+            Case UICommand.DOWN
+                result = menu.HandleMenuCommand(MenuCommand.NextItem)
+            Case UICommand.UP
+                result = menu.HandleMenuCommand(MenuCommand.PreviousItem)
+            Case UICommand.GREEN, UICommand.START
+                result = menu.HandleMenuCommand(MenuCommand.Choose)
+            Case UICommand.RED
+                result = menu.HandleMenuCommand(MenuCommand.Cancel)
         End Select
-        Return Me
+        Return If(result, Me)
     End Function
 End Class

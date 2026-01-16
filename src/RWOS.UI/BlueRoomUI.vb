@@ -29,21 +29,18 @@ Public Class BlueRoomUI
         Next
     End Sub
 
-    Public Overrides Function HandleCommand(cmd As String) As IUI(Of CGAHue)
+    Protected Overrides Function HandleUICommand(cmd As UICommand) As IUI(Of CGAHue)
         Select Case cmd
-            Case "KeyUp", "ButtonDPadUp"
+            Case UICommand.UP
                 Model.Move(Direction.North)
-            Case "KeyRight", "ButtonDPadRight"
+            Case UICommand.RIGHT
                 Model.Move(Direction.East)
-            Case "KeyDown", "ButtonDPadDown"
+            Case UICommand.DOWN
                 Model.Move(Direction.South)
-            Case "KeyLeft", "ButtonDPadLeft"
+            Case UICommand.LEFT
                 Model.Move(Direction.West)
-            Case "ButtonA", "KeySpace"
-            Case "ButtonB", "KeyEscape"
+            Case UICommand.RED, UICommand.BACK
                 Return New MainMenuUI(Controls, Model)
-            Case "ButtonBack", "KeyTab"
-            Case "ButtonStart", "KeyEnter"
         End Select
         Return Me
     End Function

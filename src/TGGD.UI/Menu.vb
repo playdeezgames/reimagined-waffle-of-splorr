@@ -32,7 +32,7 @@
         Next
     End Sub
 
-    Public Function HandleCommand(command As MenuCommand) As IUI(Of THue) Implements IMenu(Of THue).HandleCommand
+    Public Function HandleMenuCommand(command As MenuCommand) As IUI(Of THue) Implements IMenu(Of THue).HandleMenuCommand
         Select Case command
             Case MenuCommand.NextItem
                 choiceIndex = (choiceIndex + 1) Mod choices.Count
