@@ -7,6 +7,12 @@
         Me.fontData = fontData
     End Sub
 
+    Public ReadOnly Property Height As Integer Implements IFont.Height
+        Get
+            Return fontData.Height
+        End Get
+    End Property
+
     Public Function WriteText(Of THue)(
                                       pixelSink As IPixelSink(Of THue),
                                       position As (Column As Integer, Row As Integer),

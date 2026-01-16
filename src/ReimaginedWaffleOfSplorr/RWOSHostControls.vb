@@ -35,6 +35,7 @@ Friend Class RWOSHostControls
 
     Public Property ScaleY As Integer Implements IHostControls.ScaleY
     Public Event OnCommit() Implements IHostControls.OnCommit
+    Public Event OnQuit() Implements IHostControls.OnQuit
 
     Public Sub Commit() Implements IHostControls.Commit
         RaiseEvent OnCommit()
@@ -50,6 +51,10 @@ Friend Class RWOSHostControls
             End If
         End If
         effect?.Play()
+    End Sub
+
+    Public Sub Quit() Implements IHostControls.Quit
+        RaiseEvent OnQuit()
     End Sub
 
     Public Function GetFont(fontName As String) As IFont Implements IHostControls.GetFont

@@ -47,6 +47,7 @@ Public MustInherit Class BaseHost(Of THue)
         MyBase.Initialize()
         Window.Title = _title
         AddHandler _controls.OnCommit, AddressOf ApplySettings
+        AddHandler _controls.OnQuit, AddressOf [Exit]
         ApplySettings()
     End Sub
 
