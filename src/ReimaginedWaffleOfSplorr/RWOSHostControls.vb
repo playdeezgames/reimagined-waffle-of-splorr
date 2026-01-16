@@ -68,4 +68,26 @@ Friend Class RWOSHostControls
         End If
         Return font
     End Function
+
+    Public Function MapCommand(command As String) As String Implements IHostControls.MapCommand
+        Select Case command
+            Case "KeyUp", "ButtonDPadUp"
+                Return "UP"
+            Case "KeyRight", "ButtonDPadRight"
+                Return "RIGHT"
+            Case "KeyDown", "ButtonDPadDown"
+                Return "DOWN"
+            Case "KeyLeft", "ButtonDPadLeft"
+                Return "LEFT"
+            Case "ButtonA", "KeySpace"
+                Return "GREEN"
+            Case "ButtonB", "KeyEscape"
+                Return "RED"
+            Case "ButtonBack", "KeyTab"
+                Return "BACK"
+            Case "ButtonStart", "KeyEnter"
+                Return "START"
+        End Select
+        Return Nothing
+    End Function
 End Class

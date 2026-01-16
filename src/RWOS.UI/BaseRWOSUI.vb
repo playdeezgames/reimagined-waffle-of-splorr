@@ -24,25 +24,10 @@ Public MustInherit Class BaseRWOSUI
 
     Public Overrides Function HandleCommand(cmd As String) As IUI(Of CGAHue)
         Dim result As IUI(Of CGAHue) = Nothing
-        'TODO: move mapping of key and button commands to host controls
-        Select Case cmd
-            Case "KeyUp", "ButtonDPadUp"
-                result = HandleUICommand(UICommand.UP)
-            Case "KeyRight", "ButtonDPadRight"
-                result = HandleUICommand(UICommand.RIGHT)
-            Case "KeyDown", "ButtonDPadDown"
-                result = HandleUICommand(UICommand.DOWN)
-            Case "KeyLeft", "ButtonDPadLeft"
-                result = HandleUICommand(UICommand.LEFT)
-            Case "ButtonA", "KeySpace"
-                result = HandleUICommand(UICommand.GREEN)
-            Case "ButtonB", "KeyEscape"
-                result = HandleUICommand(UICommand.RED)
-            Case "ButtonBack", "KeyTab"
-                result = HandleUICommand(UICommand.BACK)
-            Case "ButtonStart", "KeyEnter"
-                result = HandleUICommand(UICommand.START)
-        End Select
+        Dim uiCommand As UICommand
+        If [Enum].TryParse(Of UICommand)(Controls.MapCommand(cmd), uiCommand) Then
+            result = HandleUICommand(uiCommand)
+        End If
         Return If(result, Me)
     End Function
 End Class
