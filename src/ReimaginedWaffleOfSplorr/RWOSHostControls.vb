@@ -1,19 +1,20 @@
 ﻿Imports System.IO
+Imports System.Net.Http.Headers
+Imports System.Net.Mime
 Imports System.Text.Json
 Imports Microsoft.Xna.Framework.Audio
+Imports Microsoft.Xna.Framework.Content
 Imports RWOS.Model
 Imports RWOS.UI
 Imports TGGD.UI
 
 Friend Class RWOSHostControls
     Implements IHostControls
-    Private ReadOnly sfxFilenames As IReadOnlyDictionary(Of String, String) =
-        New Dictionary(Of String, String) From
-        {
-            {Cues.HitWall.ToString, "Content/Audio/Sfx/HitWall.wav"},
-            {Cues.PlayerStep.ToString, "Content/Audio/Sfx/PlayerStep.wav"}
-        }
+    Const SfxFilename = "Content/sfx.json"
+    Const FontsFilename = "Content/fonts.json"
+    Private ReadOnly sfxFilenames As IReadOnlyDictionary(Of String, String)
     Private ReadOnly sfxTable As New Dictionary(Of String, SoundEffect)
+    'TODO: fonts into a config file!
     Private ReadOnly fontFileNames As IReadOnlyDictionary(Of String, String) =
         New Dictionary(Of String, String) From
         {
@@ -24,10 +25,12 @@ Friend Class RWOSHostControls
         }
     Private ReadOnly fontTable As New Dictionary(Of String, IFont)
 
+    'TODO: scale and full screen settings into config file
     Sub New()
         ScaleX = 4
         ScaleY = 4
         FullScreen = False
+        sfxFilenames = JsonSerializer.Deserialize(Of Dictionary(Of String, String))(File.ReadAllText(SfxFilename))
     End Sub
     Public Property FullScreen As Boolean Implements IHostControls.FullScreen
 

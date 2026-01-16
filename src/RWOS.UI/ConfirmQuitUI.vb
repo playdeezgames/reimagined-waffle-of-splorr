@@ -9,7 +9,9 @@ Friend Class ConfirmQuitUI
         MyBase.New(
             controls,
             model,
-            New Menu(Of CGAHue)(CGAHue.WHITE, CGAHue.BLACK, Function() New MainMenuUI(controls, model)))
+            "Are you sure you want to quit?",
+            CGAHue.MAGENTA,
+            New PickerMenu(Function() New MainMenuUI(controls, model)))
         menu.AddChoice("No", Function() New MainMenuUI(controls, model))
         menu.AddChoice("Yes", Function()
                                   controls.Quit()

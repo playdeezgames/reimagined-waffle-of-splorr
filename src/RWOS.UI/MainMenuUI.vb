@@ -9,7 +9,9 @@ Friend Class MainMenuUI
         MyBase.New(
             controls,
             model,
-            New Menu(Of CGAHue)(CGAHue.WHITE, CGAHue.BLACK, Function() New BlueRoomUI(controls, model)))
+            "Main Menu",
+            CGAHue.CYAN,
+            New PickerMenu(Function() New BlueRoomUI(controls, model)))
         menu.AddChoice("Quit", Function() New ConfirmQuitUI(controls, model))
     End Sub
 
