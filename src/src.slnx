@@ -1,11 +1,22 @@
 <Solution>
+  <Folder Name="/Data/">
+    <Project Path="RWOS.Data/RWOS.Data.vbproj" Id="e8858061-5a36-40e3-8cf1-0252e61ece29" />
+    <Project Path="TGGD.Data/TGGD.Data.vbproj" Id="e014ef90-404a-475f-97b5-e351e84a0740" />
+  </Folder>
+  <Folder Name="/Model/">
+    <Project Path="RWOS.Model/RWOS.Model.vbproj" Id="75cfe884-2d37-493c-a2ef-f12bb48e2d22" />
+    <Project Path="TGGD.Model/TGGD.Model.vbproj" Id="d39b5777-f3b7-40bc-8132-556f01775d86" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="ReimaginedWaffleOfSplorr/ReimaginedWaffleOfSplorr.vbproj" Id="bec4ac61-9699-4aa5-9b03-0169e7088d12" />
+    <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="4d6d5a21-a8e2-4b91-9bf7-5c65ba5293d3" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
+  <Folder Name="/UI/">
+    <Project Path="RWOS.UI/RWOS.UI.vbproj" />
+    <Project Path="TGGD.UI/TGGD.UI.vbproj" />
+  </Folder>
   <Folder Name="/Utility/" />
-  <Project Path="ReimaginedWaffleOfSplorr/ReimaginedWaffleOfSplorr.vbproj" Id="bec4ac61-9699-4aa5-9b03-0169e7088d12" />
-  <Project Path="RWOS.Model/RWOS.Model.vbproj" Id="75cfe884-2d37-493c-a2ef-f12bb48e2d22" />
-  <Project Path="RWOS.UI/RWOS.UI.vbproj" />
-  <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="4d6d5a21-a8e2-4b91-9bf7-5c65ba5293d3" />
-  <Project Path="TGGD.UI/TGGD.UI.vbproj" />
 </Solution>
