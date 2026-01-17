@@ -1,7 +1,7 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Friend Class MainMenuUI
+Public Class MainMenuUI
     Inherits BaseMenuUI
     Implements IUI(Of CGAHue)
 
@@ -12,7 +12,7 @@ Friend Class MainMenuUI
             "Main Menu",
             CGAHue.CYAN,
             New PickerMenu(Function() New BlueRoomUI(controls, model)))
-        menu.AddChoice("Quit", Function() New ConfirmQuitUI(controls, model))
+        _menu.AddChoice("Quit", Function() New ConfirmQuitUI(controls, model))
     End Sub
 
     Protected Overrides ReadOnly Property font As IFont

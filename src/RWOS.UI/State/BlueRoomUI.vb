@@ -1,7 +1,7 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Public Class BlueRoomUI
+Friend Class BlueRoomUI
     Inherits BaseRWOSUI
     Const CELL_WIDTH = 8
     Const CELL_HEIGHT = 8
