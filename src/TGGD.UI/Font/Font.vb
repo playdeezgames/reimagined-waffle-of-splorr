@@ -1,4 +1,6 @@
-﻿Public Class Font
+﻿Imports TGGD.Data
+
+Public Class Font
     Implements IFont
 
     Private ReadOnly fontData As FontData

@@ -6,6 +6,7 @@ Imports Microsoft.Xna.Framework.Audio
 Imports Microsoft.Xna.Framework.Content
 Imports RWOS.Model
 Imports RWOS.UI
+Imports TGGD.Data
 Imports TGGD.UI
 
 Friend Class RWOSHostControls
