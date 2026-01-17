@@ -11,7 +11,7 @@ Public Class MainMenuUI
             model,
             "Main Menu",
             CGAHue.CYAN,
-            New PickerMenu(Function() New BlueRoomUI(controls, model)))
+            New PickerMenu(Function() New ConfirmQuitUI(controls, model)))
         _menu.AddChoice("Quit", Function() New ConfirmQuitUI(controls, model))
     End Sub
 
