@@ -27,10 +27,10 @@ Public MustInherit Class BaseHost(Of THue)
     Sub New(
            title As String,
            settings As IHostControls,
-           ui As IUI(Of THue))
+           launcher As Func(Of IUI(Of THue)))
         _title = title
         _controls = settings
-        _ui = ui
+        _ui = launcher.Invoke
         _graphics = New GraphicsDeviceManager(Me)
         Content.RootDirectory = "Content"
         IsMouseVisible = False
