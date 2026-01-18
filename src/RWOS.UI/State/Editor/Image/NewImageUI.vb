@@ -52,7 +52,8 @@ Public Class NewImageUI
     End Function
 
     Private Function CreateImage() As IUI(Of CGAHue)
-        Return Me
+        Model.CreateImage()
+        Return EditImageUI.Launch(Controls, Model).Invoke
     End Function
 
     Protected Overrides ReadOnly Property font As IFont

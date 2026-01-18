@@ -1,6 +1,7 @@
 Imports System.IO
 Imports System.Text.Json
 Imports RWOS.Data
+Imports TGGD.Data
 
 Public MustInherit Class WorldModel
     Implements IWorldModel
@@ -42,4 +43,18 @@ Public MustInherit Class WorldModel
     End Sub
 
     Protected MustOverride Sub HandleCue(cue As Cues)
+
+    Public Function CreateImage() As IImageModel Implements IWorldModel.CreateImage
+        data.Images(ImageName) = New ImageData With
+        {
+            .Columns = ImageColumns,
+            .Rows = ImageRows,
+            .Pixels = Enumerable.Repeat(0, ImageColumns * ImageRows).ToArray
+        }
+        Return GetImage(ImageName)
+    End Function
+
+    Public Function GetImage(imageName As String) As IImageModel Implements IWorldModel.GetImage
+        Return New ImageModel(data, imageName)
+    End Function
 End Class
