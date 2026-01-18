@@ -16,6 +16,20 @@ Friend Class ImageModel
         Me.ImageName = imageName
     End Sub
 
+    Public Function GetPixel(column As Integer, row As Integer) As Integer Implements IImageModel.GetPixel
+        If column < 0 OrElse row < 0 OrElse column >= Columns OrElse row >= Rows Then
+            Return 0
+        End If
+        Return imageData.Pixels(row * Columns + column)
+    End Function
+
+    Public Sub SetPixel(column As Integer, row As Integer, hue As Integer) Implements IImageModel.SetPixel
+        If column < 0 OrElse row < 0 OrElse column >= Columns OrElse row >= Rows Then
+            Return
+        End If
+        imageData.Pixels(row * Columns + column) = hue
+    End Sub
+
     Public ReadOnly Property ImageName As String Implements IImageModel.ImageName
 
     Public ReadOnly Property Columns As Integer Implements IImageModel.Columns

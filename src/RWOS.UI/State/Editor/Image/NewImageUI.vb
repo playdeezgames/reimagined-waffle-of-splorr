@@ -10,8 +10,8 @@ Public Class NewImageUI
             model,
             "New Image...",
             CGAHue.CYAN,
-            New PickerMenu(ImageEditorUI.Launch(controls, model)))
-        _menu.AddChoice("Cancel", ImageEditorUI.Launch(controls, model))
+            New PickerMenu(ImageEditListUI.Launch(controls, model)))
+        _menu.AddChoice("Cancel", ImageEditListUI.Launch(controls, model))
         If CanCreateImage Then
             _menu.AddChoice($"Create!", AddressOf CreateImage)
         End If

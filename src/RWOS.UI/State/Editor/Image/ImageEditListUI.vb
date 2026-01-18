@@ -1,7 +1,7 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Public Class ImageEditorUI
+Public Class ImageEditListUI
     Inherits BaseMenuUI
 
     Private Sub New(controls As IHostControls, model As IWorldModel)
@@ -24,6 +24,6 @@ Public Class ImageEditorUI
     End Property
 
     Friend Shared Function Launch(controls As IHostControls, model As IWorldModel) As Func(Of IUI(Of CGAHue))
-        Return Function() New ImageEditorUI(controls, model)
+        Return Function() New ImageEditListUI(controls, model)
     End Function
 End Class
