@@ -38,6 +38,12 @@ Public MustInherit Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property ImageNames As IEnumerable(Of String) Implements IWorldModel.ImageNames
+        Get
+            Return data.Images.Keys
+        End Get
+    End Property
+
     Public Sub Save(filename As String) Implements IWorldModel.Save
         File.WriteAllText(filename, JsonSerializer.Serialize(data))
     End Sub

@@ -8,7 +8,14 @@ Public Class ImageEditorUI
         MyBase.New(controls, model, "Image Editor", CGAHue.CYAN, New PickerMenu(EditorMenuUI.Launch(controls, model)))
         _menu.AddChoice("Go Back", EditorMenuUI.Launch(controls, model))
         _menu.AddChoice("New Image", NewImageUI.Launch(controls, model))
+        For Each imageName In model.ImageNames
+            _menu.AddChoice(imageName, EditImage(imageName))
+        Next
     End Sub
+
+    Private Function EditImage(imageName As String) As Func(Of IUI(Of CGAHue))
+        Return Function() EditImageUI.Launch(Controls, Model, imageName).Invoke
+    End Function
 
     Protected Overrides ReadOnly Property font As IFont
         Get

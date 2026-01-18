@@ -4,13 +4,16 @@ Imports TGGD.UI
 Public Class EditImageUI
     Inherits BaseRWOSUI
 
-    Private Sub New(controls As IHostControls, model As IWorldModel)
+    Private ReadOnly imageName As String
+
+    Private Sub New(controls As IHostControls, model As IWorldModel, imageName As String)
         MyBase.New(controls, model)
+        Me.imageName = imageName
     End Sub
 
     Private ReadOnly Property Image As IImageModel
         Get
-            Return Model.GetImage(Model.ImageName)
+            Return Model.GetImage(imageName)
         End Get
     End Property
 
@@ -27,7 +30,7 @@ Public Class EditImageUI
     End Function
 
 
-    Friend Shared Function Launch(controls As IHostControls, model As IWorldModel) As Func(Of IUI(Of CGAHue))
-        Return Function() New EditImageUI(controls, model)
+    Friend Shared Function Launch(controls As IHostControls, model As IWorldModel, imageName As String) As Func(Of IUI(Of CGAHue))
+        Return Function() New EditImageUI(controls, model, imageName)
     End Function
 End Class
