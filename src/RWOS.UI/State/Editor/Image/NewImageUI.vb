@@ -15,7 +15,7 @@ Public Class NewImageUI
         If model.CanCreateImage Then
             _menu.AddChoice($"Create!", AddressOf CreateImage)
         End If
-        _menu.AddChoice($"Name: {model.ImageFilename}", AddressOf ChangeName)
+        _menu.AddChoice($"Name: {model.ImageName}", AddressOf ChangeName)
         _menu.AddChoice($"Columns: {model.ImageColumns}", AddressOf ChangeColumns)
         _menu.AddChoice($"Rows: {model.ImageRows}", AddressOf ChangeRows)
     End Sub
@@ -43,7 +43,12 @@ Public Class NewImageUI
     End Function
 
     Private Function ChangeName() As IUI(Of CGAHue)
-        Return Me
+        Return TextEditUI.Launch(Controls, Model, "New Value For Image Name", CGAHue.CYAN, Model.ImageName, AddressOf ConfirmNameChange, AddressOf CancelChange).Invoke
+    End Function
+
+    Private Function ConfirmNameChange(newValue As String) As IUI(Of CGAHue)
+        Model.ImageName = newValue
+        Return New NewImageUI(Controls, Model)
     End Function
 
     Private Function CreateImage() As IUI(Of CGAHue)

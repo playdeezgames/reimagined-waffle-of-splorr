@@ -7,35 +7,33 @@ Public MustInherit Class WorldModel
     ReadOnly data As WorldData
     Sub New()
         data = New WorldData
+        ImageName = String.Empty
     End Sub
 
-    Public ReadOnly Property ImageFilename As String Implements IWorldModel.ImageFilename
-        Get
-            Return data.ImageFilename
-        End Get
-    End Property
-
+    Public Property ImageName As String Implements IWorldModel.ImageName
+    Private _imageColumns As Integer = 0
+    Private _imageRows As Integer = 0
     Public Property ImageColumns As Integer Implements IWorldModel.ImageColumns
         Get
-            Return data.ImageColumns
+            Return _imageColumns
         End Get
         Set(value As Integer)
-            data.ImageColumns = Math.Max(0, value)
+            _imageColumns = Math.Max(0, value)
         End Set
     End Property
 
     Public Property ImageRows As Integer Implements IWorldModel.ImageRows
         Get
-            Return data.ImageRows
+            Return _imageRows
         End Get
         Set(value As Integer)
-            data.ImageRows = Math.Max(0, value)
+            _imageRows = Math.Max(0, value)
         End Set
     End Property
 
     Public ReadOnly Property CanCreateImage As Boolean Implements IWorldModel.CanCreateImage
         Get
-            Return Not String.IsNullOrWhiteSpace(ImageFilename) AndAlso ImageColumns > 0 AndAlso ImageRows > 0
+            Return Not String.IsNullOrWhiteSpace(ImageName) AndAlso ImageColumns > 0 AndAlso ImageRows > 0
         End Get
     End Property
 
