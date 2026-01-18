@@ -12,7 +12,43 @@ Public Class NewImageUI
             CGAHue.CYAN,
             New PickerMenu(ImageEditorUI.Launch(controls, model)))
         _menu.AddChoice("Cancel", ImageEditorUI.Launch(controls, model))
+        If model.CanCreateImage Then
+            _menu.AddChoice($"Create!", AddressOf CreateImage)
+        End If
+        _menu.AddChoice($"Name: {model.ImageFilename}", AddressOf ChangeName)
+        _menu.AddChoice($"Columns: {model.ImageColumns}", AddressOf ChangeColumns)
+        _menu.AddChoice($"Rows: {model.ImageRows}", AddressOf ChangeRows)
     End Sub
+
+    Private Function ChangeRows() As IUI(Of CGAHue)
+        Return NumberEditUI.Launch(Controls, Model, "New Value For Image Rows", CGAHue.CYAN, Model.ImageRows, AddressOf ConfirmRowChange, AddressOf CancelChange).Invoke
+    End Function
+
+    Private Function ChangeColumns() As IUI(Of CGAHue)
+        Return NumberEditUI.Launch(Controls, Model, "New Value For Image Columns", CGAHue.CYAN, Model.ImageColumns, AddressOf ConfirmColumnChange, AddressOf CancelChange).Invoke
+    End Function
+
+    Private Function CancelChange() As IUI(Of CGAHue)
+        Return Me
+    End Function
+
+    Private Function ConfirmRowChange(newValue As Integer) As IUI(Of CGAHue)
+        Model.ImageRows = newValue
+        Return New NewImageUI(Controls, Model)
+    End Function
+
+    Private Function ConfirmColumnChange(newValue As Integer) As IUI(Of CGAHue)
+        Model.ImageColumns = newValue
+        Return New NewImageUI(Controls, Model)
+    End Function
+
+    Private Function ChangeName() As IUI(Of CGAHue)
+        Return Me
+    End Function
+
+    Private Function CreateImage() As IUI(Of CGAHue)
+        Return Me
+    End Function
 
     Protected Overrides ReadOnly Property font As IFont
         Get
