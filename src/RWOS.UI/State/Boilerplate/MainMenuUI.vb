@@ -12,11 +12,23 @@ Public Class MainMenuUI
             model,
             "Main Menu",
             CGAHue.CYAN,
-            New PickerMenu(ConfirmQuitUI.Launch(controls, model)))
+            New PickerMenu(ConfirmQuit(controls, model)))
         _menu.AddChoice("Edit...", EditorMenuUI.Launch(controls, model))
         _menu.AddChoice("Save...", SaveModel())
-        _menu.AddChoice("Quit", ConfirmQuitUI.Launch(controls, model))
+        _menu.AddChoice("Quit", ConfirmQuit(controls, model))
     End Sub
+
+    Private Shared Function ConfirmQuit(controls As IHostControls, model As IWorldModel) As Func(Of IUI(Of CGAHue))
+        Return ConfirmUI.Launch(controls,
+            model,
+            "Are you sure you want to quit?",
+            CGAHue.MAGENTA,
+            Function()
+                controls.Quit()
+                Return Nothing
+            End Function,
+            MainMenuUI.Launch(controls, model))
+    End Function
 
     Private Function SaveModel() As Func(Of IUI(Of CGAHue))
         Return Function()

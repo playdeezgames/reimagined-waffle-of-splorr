@@ -18,7 +18,19 @@ Public Class EditImageMenuUI
         _menu.AddChoice("Done", ImageEditListUI.Launch(controls, model))
         _menu.AddChoice("Export...", ExportImage())
         _menu.AddChoice("Duplicate...", DuplicateImage())
+        _menu.AddChoice("Delete", ConfirmDeleteImage())
     End Sub
+
+    Private Function ConfirmDeleteImage() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Return ConfirmUI.Launch(Controls, Model, "Are you sure you want to delete?", CGAHue.MAGENTA, AddressOf HandleDelete, AddressOf CancelOperation).Invoke
+               End Function
+    End Function
+
+    Private Function HandleDelete() As IUI(Of CGAHue)
+        Model.DeleteImage(imageName)
+        Return ImageEditListUI.Launch(Controls, Model).Invoke
+    End Function
 
     Private Function DuplicateImage() As Func(Of IUI(Of CGAHue))
         Return Function()

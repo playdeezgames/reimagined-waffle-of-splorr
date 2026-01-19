@@ -15,6 +15,10 @@ Public MustInherit Class WorldModel
         End Get
     End Property
 
+    Public Sub DeleteImage(imageName As String) Implements IWorldModel.DeleteImage
+        data.Images.Remove(imageName)
+    End Sub
+
     Protected MustOverride Sub HandleCue(cue As Cues)
 
     Public Function CreateImage(name As String, columns As Integer, rows As Integer) As IImageModel Implements IWorldModel.CreateImage
