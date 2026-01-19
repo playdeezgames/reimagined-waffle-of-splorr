@@ -52,7 +52,7 @@ Public Class NewImageUI
     End Function
 
     Private Function CreateImage() As IUI(Of CGAHue)
-        Model.CreateImage(ImageName, ImageColumns, ImageRows)
+        Model.Images.CreateImage(ImageName, ImageColumns, ImageRows)
         Return EditImageUI.Launch(Controls, Model, ImageName).Invoke
     End Function
 

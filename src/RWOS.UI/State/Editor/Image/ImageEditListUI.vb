@@ -10,7 +10,7 @@ Public Class ImageEditListUI
         _menu.AddChoice("New Image", NewImageUI.Launch(controls, model))
         _menu.AddChoice("Import Single Image...", ImportSingleImage(controls, model, Me))
         _menu.AddChoice("Export All...", ExportAllImages(controls, model, Me))
-        For Each imageName In model.ImageNames
+        For Each imageName In model.Images.ImageNames
             _menu.AddChoice(imageName, EditImage(imageName))
         Next
     End Sub
@@ -23,7 +23,7 @@ Public Class ImageEditListUI
 
     Private Function HandleExportAll(controls As IHostControls, model As IWorldModel) As Func(Of String, IUI(Of CGAHue))
         Return Function(filename)
-                   controls.Save(filename, model.ExportImages())
+                   controls.Save(filename, model.Images.ExportImages())
                    Return ImageEditListUI.Launch(controls, model).Invoke
                End Function
     End Function
@@ -42,7 +42,7 @@ Public Class ImageEditListUI
 
     Private Shared Function HandleImport2(controls As IHostControls, model As IWorldModel, filename As String) As Func(Of String, IUI(Of CGAHue))
         Return Function(imageName)
-                   model.ImportImage(imageName, controls.Load(filename))
+                   model.Images.ImportImage(imageName, controls.Load(filename))
                    Return EditImageUI.Launch(controls, model, imageName).Invoke
                End Function
     End Function

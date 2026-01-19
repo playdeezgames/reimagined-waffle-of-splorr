@@ -15,7 +15,7 @@ Public Class EditImageUI
 
     Private ReadOnly Property Image As IImageModel
         Get
-            Return Model.GetImage(imageName)
+            Return Model.Images.GetImage(imageName)
         End Get
     End Property
 
