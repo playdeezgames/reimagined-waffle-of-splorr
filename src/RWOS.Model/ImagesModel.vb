@@ -11,17 +11,17 @@ Friend Class ImagesModel
         Me.data = data
     End Sub
 
-    Public ReadOnly Property ImageNames As IEnumerable(Of String) Implements IImagesModel.ImageNames
+    Public ReadOnly Property Names As IEnumerable(Of String) Implements IImagesModel.Names
         Get
             Return data.Images.Keys
         End Get
     End Property
 
-    Public Sub DeleteImage(imageName As String) Implements IImagesModel.DeleteImage
+    Public Sub Delete(imageName As String) Implements IImagesModel.Delete
         data.Images.Remove(imageName)
     End Sub
 
-    Public Function CreateImage(name As String, columns As Integer, rows As Integer) As IImageModel Implements IImagesModel.CreateImage
+    Public Function Create(name As String, columns As Integer, rows As Integer) As IImageModel Implements IImagesModel.Create
         data.Images(name) = New ImageData With
         {
             .columns = columns,
@@ -40,7 +40,7 @@ Friend Class ImagesModel
         Return GetImage(imageName)
     End Function
 
-    Public Function ExportImages() As String Implements IImagesModel.ExportImages
+    Public Function Export() As String Implements IImagesModel.Export
         Return JsonSerializer.Serialize(data.Images)
     End Function
 End Class

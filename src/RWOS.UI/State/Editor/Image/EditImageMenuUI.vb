@@ -28,7 +28,7 @@ Public Class EditImageMenuUI
     End Function
 
     Private Function HandleDelete() As IUI(Of CGAHue)
-        Model.Images.DeleteImage(imageName)
+        Model.Images.Delete(imageName)
         Return ImageEditListUI.Launch(Controls, Model).Invoke
     End Function
 
@@ -47,7 +47,7 @@ Public Class EditImageMenuUI
 
     Private Function HandleDuplicate(newImageName As String) As IUI(Of CGAHue)
         Dim imageModel = Model.Images.GetImage(imageName)
-        Dim duplicateModel = Model.Images.CreateImage(newImageName, imageModel.Columns, imageModel.Rows)
+        Dim duplicateModel = Model.Images.Create(newImageName, imageModel.Columns, imageModel.Rows)
         For Each x In Enumerable.Range(0, imageModel.Columns)
             For Each y In Enumerable.Range(0, imageModel.Rows)
                 duplicateModel.SetPixel(x, y, imageModel.GetPixel(x, y))
