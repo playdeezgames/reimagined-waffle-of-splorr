@@ -15,6 +15,12 @@ Public MustInherit Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property Images As IImagesModel Implements IWorldModel.Images
+        Get
+            Return New ImagesModel(data)
+        End Get
+    End Property
+
     Public Sub DeleteImage(imageName As String) Implements IWorldModel.DeleteImage
         data.Images.Remove(imageName)
     End Sub
