@@ -10,4 +10,5 @@
     Function GetFont(fontName As String) As IFont
     Function MapCommand(command As String) As String
     Sub Save(filename As String, data As String)
+    Function Load(filename As String) As String
 End Interface

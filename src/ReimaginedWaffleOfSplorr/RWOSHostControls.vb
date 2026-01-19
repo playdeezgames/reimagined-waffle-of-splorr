@@ -94,4 +94,8 @@ Friend Class RWOSHostControls
         End Select
         Return Nothing
     End Function
+
+    Public Function Load(filename As String) As String Implements IHostControls.Load
+        Return File.ReadAllText(filename)
+    End Function
 End Class

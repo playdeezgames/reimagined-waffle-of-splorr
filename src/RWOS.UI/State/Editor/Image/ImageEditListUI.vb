@@ -8,10 +8,30 @@ Public Class ImageEditListUI
         MyBase.New(controls, model, "Image Editor", CGAHue.CYAN, New PickerMenu(EditorMenuUI.Launch(controls, model)))
         _menu.AddChoice("Go Back", EditorMenuUI.Launch(controls, model))
         _menu.AddChoice("New Image", NewImageUI.Launch(controls, model))
+        _menu.AddChoice("Import...", ImportImage(controls, model, Me))
         For Each imageName In model.ImageNames
             _menu.AddChoice(imageName, EditImage(imageName))
         Next
     End Sub
+
+    Private Shared Function ImportImage(controls As IHostControls, model As IWorldModel, ui As IUI(Of CGAHue)) As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Return TextEditUI.Launch(controls, model, "Import Image From...", CGAHue.CYAN, String.Empty, HandleImport(controls, model, ui), Function() ui).Invoke
+               End Function
+    End Function
+
+    Private Shared Function HandleImport(controls As IHostControls, model As IWorldModel, ui As IUI(Of CGAHue)) As Func(Of String, IUI(Of CGAHue))
+        Return Function(filename)
+                   Return TextEditUI.Launch(controls, model, "Imported Image Name...", CGAHue.CYAN, String.Empty, HandleImport2(controls, model, filename), Function() ui).Invoke
+               End Function
+    End Function
+
+    Private Shared Function HandleImport2(controls As IHostControls, model As IWorldModel, filename As String) As Func(Of String, IUI(Of CGAHue))
+        Return Function(imageName)
+                   model.ImportImage(imageName, controls.Load(filename))
+                   Return EditImageUI.Launch(controls, model, imageName).Invoke
+               End Function
+    End Function
 
     Private Function EditImage(imageName As String) As Func(Of IUI(Of CGAHue))
         Return Function() EditImageUI.Launch(Controls, Model, imageName).Invoke

@@ -38,4 +38,9 @@ Public MustInherit Class WorldModel
     Public Function Export() As String Implements IWorldModel.Export
         Return JsonSerializer.Serialize(data)
     End Function
+
+    Public Function ImportImage(imageName As String, imageData As String) As IImageModel Implements IWorldModel.ImportImage
+        data.Images(imageName) = JsonSerializer.Deserialize(Of ImageData)(imageData)
+        Return GetImage(imageName)
+    End Function
 End Class
