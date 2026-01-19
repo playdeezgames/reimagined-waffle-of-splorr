@@ -4,5 +4,6 @@
     ReadOnly Property ImageNames As IEnumerable(Of String)
     Sub DeleteImage(imageName As String)
     Function ImportImage(imageName As String, imageData As String) As IImageModel
+    Function ExportImages() As String
     Function Export() As String
 End Interface
