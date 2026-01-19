@@ -1,10 +1,6 @@
 ﻿Imports System.IO
-Imports System.Net.Http.Headers
-Imports System.Net.Mime
 Imports System.Text.Json
 Imports Microsoft.Xna.Framework.Audio
-Imports Microsoft.Xna.Framework.Content
-Imports RWOS.Model
 Imports RWOS.UI
 Imports TGGD.Data
 Imports TGGD.UI
@@ -59,6 +55,10 @@ Friend Class RWOSHostControls
 
     Public Sub Quit() Implements IHostControls.Quit
         RaiseEvent OnQuit()
+    End Sub
+
+    Public Sub Save(filename As String, data As String) Implements IHostControls.Save
+        File.WriteAllText(filename, data)
     End Sub
 
     Public Function GetFont(fontName As String) As IFont Implements IHostControls.GetFont

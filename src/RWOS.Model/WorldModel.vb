@@ -1,4 +1,3 @@
-Imports System.IO
 Imports System.Text.Json
 Imports RWOS.Data
 Imports TGGD.Data
@@ -16,10 +15,6 @@ Public MustInherit Class WorldModel
         End Get
     End Property
 
-    Public Sub Save(filename As String) Implements IWorldModel.Save
-        File.WriteAllText(filename, JsonSerializer.Serialize(data))
-    End Sub
-
     Protected MustOverride Sub HandleCue(cue As Cues)
 
     Public Function CreateImage(name As String, columns As Integer, rows As Integer) As IImageModel Implements IWorldModel.CreateImage
@@ -34,5 +29,9 @@ Public MustInherit Class WorldModel
 
     Public Function GetImage(imageName As String) As IImageModel Implements IWorldModel.GetImage
         Return New ImageModel(data, imageName)
+    End Function
+
+    Public Function Export() As String Implements IWorldModel.Export
+        Return JsonSerializer.Serialize(data)
     End Function
 End Class

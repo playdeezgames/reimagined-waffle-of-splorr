@@ -1,4 +1,5 @@
-﻿Imports RWOS.Data
+﻿Imports System.Text.Json
+Imports RWOS.Data
 Imports TGGD.Data
 
 Friend Class ImageModel
@@ -29,6 +30,10 @@ Friend Class ImageModel
         End If
         imageData.Pixels(row * Columns + column) = hue
     End Sub
+
+    Public Function Export() As String Implements IImageModel.Export
+        Return JsonSerializer.Serialize(imageData)
+    End Function
 
     Public ReadOnly Property ImageName As String Implements IImageModel.ImageName
 

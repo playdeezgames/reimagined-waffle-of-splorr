@@ -9,4 +9,5 @@
     Sub PlaySfx(sfx As String)
     Function GetFont(fontName As String) As IFont
     Function MapCommand(command As String) As String
+    Sub Save(filename As String, data As String)
 End Interface
