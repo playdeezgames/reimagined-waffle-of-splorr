@@ -2,8 +2,7 @@
 Imports TGGD.UI
 
 Friend Class ConfirmQuitUI
-    Inherits BaseMenuUI
-    Implements IUI(Of CGAHue)
+    Inherits ConfirmUI
 
     Private Sub New(controls As IHostControls, model As IWorldModel)
         MyBase.New(
@@ -11,12 +10,11 @@ Friend Class ConfirmQuitUI
             model,
             "Are you sure you want to quit?",
             CGAHue.MAGENTA,
-            New PickerMenu(MainMenuUI.Launch(controls, model)))
-        _menu.AddChoice("No", MainMenuUI.Launch(controls, model))
-        _menu.AddChoice("Yes", Function()
-                                   controls.Quit()
-                                   Return Nothing
-                               End Function)
+            Function()
+                controls.Quit()
+                Return Nothing
+            End Function,
+            MainMenuUI.Launch(controls, model))
     End Sub
 
     Protected Overrides ReadOnly Property font As IFont
