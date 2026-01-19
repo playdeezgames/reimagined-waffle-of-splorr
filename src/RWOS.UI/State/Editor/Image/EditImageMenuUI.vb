@@ -17,7 +17,32 @@ Public Class EditImageMenuUI
         Me.imageName = imageName
         _menu.AddChoice("Done", ImageEditListUI.Launch(controls, model))
         _menu.AddChoice("Export...", ExportImage())
+        _menu.AddChoice("Duplicate...", DuplicateImage())
     End Sub
+
+    Private Function DuplicateImage() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Return TextEditUI.Launch(
+                        Controls,
+                        Model,
+                        "Duplicate Image As...",
+                        CGAHue.CYAN,
+                        imageName,
+                        AddressOf HandleDuplicate,
+                        AddressOf CancelOperation).Invoke
+               End Function
+    End Function
+
+    Private Function HandleDuplicate(newImageName As String) As IUI(Of CGAHue)
+        Dim imageModel = Model.GetImage(imageName)
+        Dim duplicateModel = Model.CreateImage(newImageName, imageModel.Columns, imageModel.Rows)
+        For Each x In Enumerable.Range(0, imageModel.Columns)
+            For Each y In Enumerable.Range(0, imageModel.Rows)
+                duplicateModel.SetPixel(x, y, imageModel.GetPixel(x, y))
+            Next
+        Next
+        Return MessageUI.Launch(Controls, Model, $"Duplicated to '{newImageName}'", Function() Me).Invoke
+    End Function
 
     Private Function ExportImage() As Func(Of IUI(Of CGAHue))
         Return Function()
@@ -28,11 +53,11 @@ Public Class EditImageMenuUI
                         CGAHue.CYAN,
                         EditImageMenuUI.Filename,
                         AddressOf HandleExport,
-                        AddressOf CancelExport).Invoke
+                        AddressOf CancelOperation).Invoke
                End Function
     End Function
 
-    Private Function CancelExport() As IUI(Of CGAHue)
+    Private Function CancelOperation() As IUI(Of CGAHue)
         Return Me
     End Function
 
