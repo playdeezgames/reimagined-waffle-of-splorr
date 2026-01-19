@@ -1,7 +1,7 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Public Class NewImageUI
+Public Class CreateImageUI
     Inherits BaseMenuUI
 
     Private Sub New(controls As IHostControls, model As IWorldModel)
@@ -10,8 +10,8 @@ Public Class NewImageUI
             model,
             "New Image...",
             CGAHue.CYAN,
-            New PickerMenu(ImageEditListUI.Launch(controls, model)))
-        _menu.AddChoice("Cancel", ImageEditListUI.Launch(controls, model))
+            New PickerMenu(EditImagesUI.Launch(controls, model)))
+        _menu.AddChoice("Cancel", EditImagesUI.Launch(controls, model))
         If CanCreateImage Then
             _menu.AddChoice($"Create!", AddressOf CreateImage)
         End If
@@ -34,12 +34,12 @@ Public Class NewImageUI
 
     Private Function ConfirmRowChange(newValue As Integer) As IUI(Of CGAHue)
         ImageRows = newValue
-        Return New NewImageUI(Controls, Model)
+        Return New CreateImageUI(Controls, Model)
     End Function
 
     Private Function ConfirmColumnChange(newValue As Integer) As IUI(Of CGAHue)
         ImageColumns = newValue
-        Return New NewImageUI(Controls, Model)
+        Return New CreateImageUI(Controls, Model)
     End Function
 
     Private Function ChangeName() As IUI(Of CGAHue)
@@ -48,7 +48,7 @@ Public Class NewImageUI
 
     Private Function ConfirmNameChange(newValue As String) As IUI(Of CGAHue)
         ImageName = newValue
-        Return New NewImageUI(Controls, Model)
+        Return New CreateImageUI(Controls, Model)
     End Function
 
     Private Function CreateImage() As IUI(Of CGAHue)
@@ -63,7 +63,7 @@ Public Class NewImageUI
     End Property
 
     Friend Shared Function Launch(controls As IHostControls, model As IWorldModel) As Func(Of IUI(Of CGAHue))
-        Return Function() New NewImageUI(controls, model)
+        Return Function() New CreateImageUI(controls, model)
     End Function
 
     Private Shared Property ImageName As String = String.Empty

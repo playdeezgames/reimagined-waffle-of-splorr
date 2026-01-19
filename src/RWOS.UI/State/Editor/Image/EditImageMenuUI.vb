@@ -15,7 +15,7 @@ Public Class EditImageMenuUI
             CGAHue.CYAN,
             New PickerMenu(EditImageUI.Launch(controls, model, imageName)))
         Me.imageName = imageName
-        _menu.AddChoice("Done", ImageEditListUI.Launch(controls, model))
+        _menu.AddChoice("Done", EditImagesUI.Launch(controls, model))
         _menu.AddChoice("Export...", ExportImage())
         _menu.AddChoice("Duplicate...", DuplicateImage())
         _menu.AddChoice("Delete", ConfirmDeleteImage())
@@ -29,7 +29,7 @@ Public Class EditImageMenuUI
 
     Private Function HandleDelete() As IUI(Of CGAHue)
         Model.Images.Delete(imageName)
-        Return ImageEditListUI.Launch(Controls, Model).Invoke
+        Return EditImagesUI.Launch(Controls, Model).Invoke
     End Function
 
     Private Function DuplicateImage() As Func(Of IUI(Of CGAHue))

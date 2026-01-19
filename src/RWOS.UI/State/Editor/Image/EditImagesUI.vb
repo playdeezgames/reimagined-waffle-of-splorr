@@ -1,13 +1,13 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Public Class ImageEditListUI
+Public Class EditImagesUI
     Inherits BaseMenuUI
 
     Private Sub New(controls As IHostControls, model As IWorldModel)
         MyBase.New(controls, model, "Image Editor", CGAHue.CYAN, New PickerMenu(EditorMenuUI.Launch(controls, model)))
         _menu.AddChoice("Go Back", EditorMenuUI.Launch(controls, model))
-        _menu.AddChoice("New Image", NewImageUI.Launch(controls, model))
+        _menu.AddChoice("New Image", CreateImageUI.Launch(controls, model))
         _menu.AddChoice("Import Single Image...", ImportSingleImage(controls, model, Me))
         _menu.AddChoice("Export All...", ExportAllImages(controls, model, Me))
         For Each imageName In model.Images.Names
@@ -24,7 +24,7 @@ Public Class ImageEditListUI
     Private Function HandleExportAll(controls As IHostControls, model As IWorldModel) As Func(Of String, IUI(Of CGAHue))
         Return Function(filename)
                    controls.Save(filename, model.Images.Export())
-                   Return ImageEditListUI.Launch(controls, model).Invoke
+                   Return EditImagesUI.Launch(controls, model).Invoke
                End Function
     End Function
 
@@ -58,6 +58,6 @@ Public Class ImageEditListUI
     End Property
 
     Friend Shared Function Launch(controls As IHostControls, model As IWorldModel) As Func(Of IUI(Of CGAHue))
-        Return Function() New ImageEditListUI(controls, model)
+        Return Function() New EditImagesUI(controls, model)
     End Function
 End Class
