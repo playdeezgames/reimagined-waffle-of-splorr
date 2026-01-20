@@ -21,11 +21,15 @@ Friend Class ImagesModel
         data.Images.Remove(imageName)
     End Sub
 
+    Public Sub Import(data As String) Implements IImagesModel.Import
+        Me.data.Images = JsonSerializer.Deserialize(Of Dictionary(Of String, ImageData))(data)
+    End Sub
+
     Public Function Create(name As String, columns As Integer, rows As Integer) As IImageModel Implements IImagesModel.Create
         data.Images(name) = New ImageData With
         {
-            .columns = columns,
-            .rows = rows,
+            .Columns = columns,
+            .Rows = rows,
             .Pixels = Enumerable.Repeat(0, columns * rows).ToArray
         }
         Return GetImage(name)

@@ -5,4 +5,5 @@
     Sub Delete(imageName As String)
     Function ImportImage(imageName As String, imageData As String) As IImageModel
     Function Export() As String
+    Sub Import(data As String)
 End Interface

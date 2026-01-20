@@ -10,10 +10,24 @@ Public Class EditImagesUI
         _menu.AddChoice("New Image", CreateImageUI.Launch(controls, model))
         _menu.AddChoice("Import Single Image...", ImportSingleImage(controls, model, Me))
         _menu.AddChoice("Export All...", ExportAllImages(controls, model, Me))
+        _menu.AddChoice("Import All...", ImportAllImages(controls, model, Me))
         For Each imageName In model.Images.Names
             _menu.AddChoice(imageName, EditImage(imageName))
         Next
     End Sub
+
+    Private Function ImportAllImages(controls As IHostControls, model As IWorldModel, ui As EditImagesUI) As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Return TextEditUI.Launch(controls, model, "Import All Images From...", CGAHue.CYAN, String.Empty, HandleImportAll(controls, model), Function() ui).Invoke
+               End Function
+    End Function
+
+    Private Function HandleImportAll(controls As IHostControls, model As IWorldModel) As Func(Of String, IUI(Of CGAHue))
+        Return Function(filename)
+                   model.Images.Import(controls.Load(filename))
+                   Return EditImagesUI.Launch(controls, model).Invoke
+               End Function
+    End Function
 
     Private Function ExportAllImages(controls As IHostControls, model As IWorldModel, ui As IUI(Of CGAHue)) As Func(Of IUI(Of CGAHue))
         Return Function()
