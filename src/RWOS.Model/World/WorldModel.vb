@@ -19,8 +19,6 @@ Public MustInherit Class WorldModel
         Me.data = JsonSerializer.Deserialize(Of WorldData)(data)
     End Sub
 
-    Protected MustOverride Sub HandleCue(cue As Cues)
-
     Public Function Export() As String Implements IWorldModel.Export
         Return JsonSerializer.Serialize(data)
     End Function

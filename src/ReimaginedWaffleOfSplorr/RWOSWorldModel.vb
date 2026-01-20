@@ -10,8 +10,4 @@ Friend Class RWOSWorldModel
     Public Sub New(controls As IHostControls)
         Me.controls = controls
     End Sub
-
-    Protected Overrides Sub HandleCue(cue As Cues)
-        controls.PlaySfx(cue.ToString)
-    End Sub
 End Class
