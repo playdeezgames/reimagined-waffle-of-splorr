@@ -47,4 +47,8 @@ Friend Class ImagesModel
     Public Function Export() As String Implements IImagesModel.Export
         Return JsonSerializer.Serialize(data.Images)
     End Function
+
+    Public Function Exists(imageName As String) As Boolean Implements IImagesModel.Exists
+        Return data.Images.ContainsKey(imageName)
+    End Function
 End Class

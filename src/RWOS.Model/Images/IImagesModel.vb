@@ -1,5 +1,6 @@
 ﻿Public Interface IImagesModel
     Function Create(name As String, columns As Integer, rows As Integer) As IImageModel
+    Function Exists(imageName As String) As Boolean
     Function GetImage(imageName As String) As IImageModel
     ReadOnly Property Names As IEnumerable(Of String)
     Sub Delete(imageName As String)
