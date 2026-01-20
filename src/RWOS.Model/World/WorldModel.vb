@@ -15,6 +15,12 @@ Public MustInherit Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property LocationTypes As ILocationTypesModel Implements IWorldModel.LocationTypes
+        Get
+            Return New LocationTypesModel(data)
+        End Get
+    End Property
+
     Public Sub Import(data As String) Implements IWorldModel.Import
         Me.data = JsonSerializer.Deserialize(Of WorldData)(data)
     End Sub

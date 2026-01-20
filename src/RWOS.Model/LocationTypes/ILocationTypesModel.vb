@@ -1,0 +1,2 @@
+﻿Public Interface ILocationTypesModel
+End Interface
