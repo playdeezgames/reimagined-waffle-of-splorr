@@ -15,8 +15,28 @@ Public Class MainMenuUI
             New PickerMenu(ConfirmQuit(controls, model)))
         _menu.AddChoice("Edit...", EditorMenuUI.Launch(controls, model))
         _menu.AddChoice("Save...", SaveModel())
+        _menu.AddChoice("Load...", LoadModel())
         _menu.AddChoice("Quit", ConfirmQuit(controls, model))
     End Sub
+
+    Private Function LoadModel() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Return TextEditUI.Launch(
+                        Controls,
+                        Model,
+                        "Load World From...",
+                        CGAHue.CYAN,
+                        MainMenuUI.Filename,
+                        AddressOf ConfirmLoad,
+                        AddressOf CancelOperation).Invoke
+               End Function
+    End Function
+
+    Private Function ConfirmLoad(filename As String) As IUI(Of CGAHue)
+        MainMenuUI.Filename = filename
+        Model.Import(Controls.Load(filename))
+        Return MessageUI.Launch(Controls, Model, $"Loaded from '{filename}'", Function() Me).Invoke
+    End Function
 
     Private Shared Function ConfirmQuit(controls As IHostControls, model As IWorldModel) As Func(Of IUI(Of CGAHue))
         Return ConfirmUI.Launch(controls,
@@ -32,11 +52,11 @@ Public Class MainMenuUI
 
     Private Function SaveModel() As Func(Of IUI(Of CGAHue))
         Return Function()
-                   Return TextEditUI.Launch(Controls, Model, "Save World As...", CGAHue.CYAN, MainMenuUI.Filename, AddressOf ConfirmSave, AddressOf CancelSave).Invoke
+                   Return TextEditUI.Launch(Controls, Model, "Save World As...", CGAHue.CYAN, MainMenuUI.Filename, AddressOf ConfirmSave, AddressOf CancelOperation).Invoke
                End Function
     End Function
 
-    Private Function CancelSave() As IUI(Of CGAHue)
+    Private Function CancelOperation() As IUI(Of CGAHue)
         Return Me
     End Function
 

@@ -4,7 +4,7 @@ Imports TGGD.Data
 
 Public MustInherit Class WorldModel
     Implements IWorldModel
-    ReadOnly data As WorldData
+    Private data As WorldData
     Sub New()
         data = New WorldData
     End Sub
@@ -14,6 +14,10 @@ Public MustInherit Class WorldModel
             Return New ImagesModel(data)
         End Get
     End Property
+
+    Public Sub Import(data As String) Implements IWorldModel.Import
+        Me.data = JsonSerializer.Deserialize(Of WorldData)(data)
+    End Sub
 
     Protected MustOverride Sub HandleCue(cue As Cues)
 
