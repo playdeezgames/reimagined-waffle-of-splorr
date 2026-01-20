@@ -188,6 +188,14 @@ Public Class TextEditUI
                 column = (column + 1) Mod COLUMNS
             Case UICommand.UP
                 row = (row + ROWS - 1) Mod ROWS
+            Case UICommand.BACK
+                If column = COLUMNS - 1 Then
+                    row = (row + 1) Mod ROWS
+                Else
+                    column = COLUMNS - 1
+                End If
+            Case UICommand.START
+                Return confirm(value)
         End Select
         Return Me
     End Function
