@@ -1,4 +1,5 @@
 ﻿Imports RWOS.Model
+Imports TGGD.Model
 Imports TGGD.UI
 
 Public Class EditImageMenuUI
@@ -18,8 +19,99 @@ Public Class EditImageMenuUI
         _menu.AddChoice("Done", EditImagesUI.Launch(controls, model))
         _menu.AddChoice("Export...", ExportImage())
         _menu.AddChoice("Duplicate...", DuplicateImage())
+        _menu.AddChoice("Vertical Flip", FlipVertical())
+        _menu.AddChoice("Horizontal Flip", FlipHorizontal())
+        _menu.AddChoice("Rotate Right", RotateRight())
+        _menu.AddChoice("Rotate Left", RotateLeft())
+        _menu.AddChoice("Rotate 180", Rotate180())
         _menu.AddChoice("Delete", ConfirmDeleteImage())
     End Sub
+
+    Private Function RotateRight() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Dim imageModel = Model.Images.GetImage(imageName)
+                   Dim duplicateModel = Model.Images.Create(Guid.NewGuid.ToString, imageModel.Rows, imageModel.Columns)
+                   For Each x In Enumerable.Range(0, imageModel.Columns)
+                       For Each y In Enumerable.Range(0, imageModel.Rows)
+                           duplicateModel.SetPixel(y, imageModel.Columns - 1 - x, imageModel.GetPixel(imageModel.Columns - 1 - x, imageModel.Rows - 1 - y))
+                       Next
+                   Next
+                   imageModel = Model.Images.Create(imageName, duplicateModel.Columns, duplicateModel.Rows)
+                   For Each x In Enumerable.Range(0, imageModel.Columns)
+                       For Each y In Enumerable.Range(0, imageModel.Rows)
+                           imageModel.SetPixel(x, y, duplicateModel.GetPixel(x, y))
+                       Next
+                   Next
+                   Model.Images.Delete(duplicateModel.ImageName)
+                   Return EditImageUI.Launch(Controls, Model, imageName).Invoke
+               End Function
+    End Function
+
+    Private Function RotateLeft() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Dim imageModel = Model.Images.GetImage(imageName)
+                   Dim duplicateModel = Model.Images.Create(Guid.NewGuid.ToString, imageModel.Rows, imageModel.Columns)
+                   For Each x In Enumerable.Range(0, imageModel.Columns)
+                       For Each y In Enumerable.Range(0, imageModel.Rows)
+                           duplicateModel.SetPixel(imageModel.Rows - 1 - y, x, imageModel.GetPixel(imageModel.Columns - 1 - x, imageModel.Rows - 1 - y))
+                       Next
+                   Next
+                   imageModel = Model.Images.Create(imageName, duplicateModel.Columns, duplicateModel.Rows)
+                   For Each x In Enumerable.Range(0, imageModel.Columns)
+                       For Each y In Enumerable.Range(0, imageModel.Rows)
+                           imageModel.SetPixel(x, y, duplicateModel.GetPixel(x, y))
+                       Next
+                   Next
+                   Model.Images.Delete(duplicateModel.ImageName)
+                   Return EditImageUI.Launch(Controls, Model, imageName).Invoke
+               End Function
+    End Function
+
+    Private Function Rotate180() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Dim imageModel = Model.Images.GetImage(imageName)
+                   Dim duplicateModel = Model.Images.Create(Guid.NewGuid.ToString, imageModel.Columns, imageModel.Rows)
+                   For Each x In Enumerable.Range(0, imageModel.Columns)
+                       For Each y In Enumerable.Range(0, imageModel.Rows)
+                           duplicateModel.SetPixel(x, y, imageModel.GetPixel(imageModel.Columns - 1 - x, imageModel.Rows - 1 - y))
+                       Next
+                   Next
+                   For Each x In Enumerable.Range(0, imageModel.Columns)
+                       For Each y In Enumerable.Range(0, imageModel.Rows)
+                           imageModel.SetPixel(x, y, duplicateModel.GetPixel(x, y))
+                       Next
+                   Next
+                   Model.Images.Delete(duplicateModel.ImageName)
+                   Return EditImageUI.Launch(Controls, Model, imageName).Invoke
+               End Function
+    End Function
+
+    Private Function FlipVertical() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Dim image = Model.Images.GetImage(imageName)
+                   For Each y In Enumerable.Range(0, image.Rows \ 2)
+                       For Each x In Enumerable.Range(0, image.Columns)
+                           Dim temp = image.GetPixel(x, y)
+                           image.SetPixel(x, y, image.GetPixel(x, image.Rows - 1 - y))
+                           image.SetPixel(x, image.Rows - 1 - y, temp)
+                       Next
+                   Next
+                   Return EditImageUI.Launch(Controls, Model, imageName).Invoke
+               End Function
+    End Function
+    Private Function FlipHorizontal() As Func(Of IUI(Of CGAHue))
+        Return Function()
+                   Dim image = Model.Images.GetImage(imageName)
+                   For Each x In Enumerable.Range(0, image.Columns \ 2)
+                       For Each y In Enumerable.Range(0, image.Rows)
+                           Dim temp = image.GetPixel(x, y)
+                           image.SetPixel(x, y, image.GetPixel(image.Columns - 1 - x, y))
+                           image.SetPixel(image.Columns - 1 - x, y, temp)
+                       Next
+                   Next
+                   Return EditImageUI.Launch(Controls, Model, imageName).Invoke
+               End Function
+    End Function
 
     Private Function ConfirmDeleteImage() As Func(Of IUI(Of CGAHue))
         Return Function()
