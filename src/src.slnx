@@ -12,6 +12,7 @@
     <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="4d6d5a21-a8e2-4b91-9bf7-5c65ba5293d3" />
   </Folder>
   <Folder Name="/Solution Items/">
+    <File Path="../README.md" />
     <File Path=".editorconfig" />
   </Folder>
   <Folder Name="/UI/">

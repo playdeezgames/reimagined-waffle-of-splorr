@@ -1,13 +1,14 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Friend Class EditorMenuUI
+Friend Class EditWorldUI
     Inherits BaseMenuUI
     Implements IUI(Of CGAHue)
 
     Private Sub New(controls As IHostControls, model As IWorldModel)
         MyBase.New(controls, model, "Editor", CGAHue.CYAN, New PickerMenu(MainMenuUI.Launch(controls, model)))
         _menu.AddChoice("Go Back", MainMenuUI.Launch(controls, model))
+        _menu.AddChoice("Directions...", EditDirectionsMenuUI.Launch(controls, model))
     End Sub
 
     Protected Overrides ReadOnly Property font As IFont
@@ -17,6 +18,6 @@ Friend Class EditorMenuUI
     End Property
 
     Friend Shared Function Launch(controls As IHostControls, model As IWorldModel) As Func(Of IUI(Of CGAHue))
-        Return Function() New EditorMenuUI(controls, model)
+        Return Function() New EditWorldUI(controls, model)
     End Function
 End Class

@@ -13,7 +13,7 @@ Public Class MainMenuUI
             "Main Menu",
             CGAHue.CYAN,
             New PickerMenu(ConfirmQuit(controls, model)))
-        _menu.AddChoice("Edit...", EditorMenuUI.Launch(controls, model))
+        _menu.AddChoice("Edit...", EditWorldUI.Launch(controls, model))
         _menu.AddChoice("Save...", SaveModel())
         _menu.AddChoice("Load...", LoadModel())
         _menu.AddChoice("Quit", ConfirmQuit(controls, model))
