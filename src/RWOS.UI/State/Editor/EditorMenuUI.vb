@@ -8,8 +8,6 @@ Friend Class EditorMenuUI
     Private Sub New(controls As IHostControls, model As IWorldModel)
         MyBase.New(controls, model, "Editor", CGAHue.CYAN, New PickerMenu(MainMenuUI.Launch(controls, model)))
         _menu.AddChoice("Go Back", MainMenuUI.Launch(controls, model))
-        _menu.AddChoice("Images...", EditImagesUI.Launch(controls, model))
-        _menu.AddChoice("Location Types...", EditLocationTypesUI.Launch(controls, model))
     End Sub
 
     Protected Overrides ReadOnly Property font As IFont
