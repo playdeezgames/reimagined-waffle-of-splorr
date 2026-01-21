@@ -8,6 +8,13 @@ Public MustInherit Class WorldModel
     Sub New()
         data = New WorldData
     End Sub
+
+    Public ReadOnly Property Directions As IDirectionsModel Implements IWorldModel.Directions
+        Get
+            Return New DirectionsModel(data)
+        End Get
+    End Property
+
     Public Sub Import(data As String) Implements IWorldModel.Import
         Me.data = JsonSerializer.Deserialize(Of WorldData)(data)
     End Sub
