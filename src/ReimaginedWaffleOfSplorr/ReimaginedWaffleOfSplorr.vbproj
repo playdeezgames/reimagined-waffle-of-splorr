@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>ReimaginedWaffleOfSplorr</RootNamespace>
     <TargetFramework>net10.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
@@ -14,49 +14,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Content\Audio\Sfx\HitWall.wav" />
-    <None Remove="Content\Audio\Sfx\PlayerStep.wav" />
-    <None Remove="Content\fonts.json" />
-    <None Remove="Content\Fonts\CyFont3x5.json" />
-    <None Remove="Content\Fonts\CyFont4x6.json" />
-    <None Remove="Content\Fonts\CyFont5x7.json" />
-    <None Remove="Content\Fonts\CyFont8x8.json" />
-    <None Remove="Content\sfx.json" />
-    <None Remove="Icon.bmp" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Content\Audio\Sfx\HitWall.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Audio\Sfx\PlayerStep.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\fonts.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Fonts\CyFont3x5.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Fonts\CyFont4x6.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Fonts\CyFont5x7.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Fonts\CyFont8x8.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\sfx.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Icon.bmp" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RWOS.UI\RWOS.UI.vbproj" />

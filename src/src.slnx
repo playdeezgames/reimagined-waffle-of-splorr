@@ -9,14 +9,14 @@
   </Folder>
   <Folder Name="/Presentation/">
     <Project Path="ReimaginedWaffleOfSplorr/ReimaginedWaffleOfSplorr.vbproj" Id="bec4ac61-9699-4aa5-9b03-0169e7088d12" />
-    <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="4d6d5a21-a8e2-4b91-9bf7-5c65ba5293d3" />
+    <Project Path="TGGD.Presentation/TGGD.Presentation.vbproj" Id="9de9d0eb-0195-444f-8c5c-a57806561410" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
   <Folder Name="/UI/">
-    <Project Path="RWOS.UI/RWOS.UI.vbproj" />
-    <Project Path="TGGD.UI/TGGD.UI.vbproj" />
+    <Project Path="RWOS.UI/RWOS.UI.vbproj" Id="14b5c68d-6cae-46a1-b434-081cfb0fa5b6" />
+    <Project Path="TGGD.UI/TGGD.UI.vbproj" Id="a72188c0-dd55-4030-aee8-925b519a617a" />
   </Folder>
   <Folder Name="/Utility/" />
 </Solution>

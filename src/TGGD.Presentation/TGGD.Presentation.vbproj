@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4.1" />
+    <PackageReference Include="Terminal.Gui" Version="2.0.0-alpha.4031" />
   </ItemGroup>
 
   <ItemGroup>
