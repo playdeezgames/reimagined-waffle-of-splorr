@@ -1,10 +1,11 @@
-﻿Imports TGGD.UI
+﻿Imports RWOS.Model
+Imports TGGD.UI
 
 Public Class MainMenu
     Inherits UIBase
 
-    Public Sub New(external As IExternal)
-        MyBase.New(external)
+    Public Sub New(external As IExternal, model As IWorldModel)
+        MyBase.New(external, model)
     End Sub
 
     Public Overrides ReadOnly Property Title As String
@@ -16,7 +17,7 @@ Public Class MainMenu
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
             Return {
-                    New UIChoice("Quit", Function() New ConfirmQuit(External))
+                    New UIChoice("Quit", Function() New ConfirmQuit(External, Model))
                 }
         End Get
     End Property

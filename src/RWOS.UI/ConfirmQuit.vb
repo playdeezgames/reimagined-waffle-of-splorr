@@ -1,10 +1,11 @@
-﻿Imports TGGD.UI
+﻿Imports RWOS.Model
+Imports TGGD.UI
 
 Friend Class ConfirmQuit
     Inherits UIBase
 
-    Public Sub New(external As IExternal)
-        MyBase.New(external)
+    Public Sub New(external As IExternal, model As IWorldModel)
+        MyBase.New(external, model)
     End Sub
 
     Public Overrides ReadOnly Property Title As String
@@ -16,7 +17,7 @@ Friend Class ConfirmQuit
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
             Return {
-                New UIChoice("No", Function() New MainMenu(External)),
+                New UIChoice("No", Function() New MainMenu(External, Model)),
                 New UIChoice("Yes", Function() Nothing)
                 }
         End Get

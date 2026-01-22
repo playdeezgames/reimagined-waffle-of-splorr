@@ -1,8 +1,7 @@
 Imports System.Text.Json
 Imports RWOS.Data
-Imports TGGD.Data
 
-Public MustInherit Class WorldModel
+Public Class WorldModel
     Implements IWorldModel
     Private data As WorldData
     Sub New()
