@@ -20,4 +20,10 @@ Public Class MainMenu
                 }
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Lines As IEnumerable(Of String)
+        Get
+            Return {"This is some text! View me and fear!"}
+        End Get
+    End Property
 End Class

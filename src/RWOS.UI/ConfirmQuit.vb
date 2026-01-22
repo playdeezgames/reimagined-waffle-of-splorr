@@ -9,7 +9,7 @@ Friend Class ConfirmQuit
 
     Public Overrides ReadOnly Property Title As String
         Get
-            Return "Are you sure you want to quit?"
+            Return "Confirm Quit"
         End Get
     End Property
 
@@ -19,6 +19,12 @@ Friend Class ConfirmQuit
                 New UIChoice("No", Function() New MainMenu(External)),
                 New UIChoice("Yes", Function() Nothing)
                 }
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property Lines As IEnumerable(Of String)
+        Get
+            Return {"Are you sure you want to quit?"}
         End Get
     End Property
 End Class
