@@ -1,7 +1,7 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Public Class MainMenu
+Friend Class EditWorld
     Inherits UIBase
 
     Public Sub New(external As IExternal, model As IWorldModel)
@@ -10,22 +10,24 @@ Public Class MainMenu
 
     Public Overrides ReadOnly Property Title As String
         Get
-            Return "Main Menu"
+            Return "World Editor"
         End Get
     End Property
 
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
             Return {
-                    New UIChoice("Edit...", Function() New EditWorld(External, Model)),
-                    New UIChoice("Quit", Function() New ConfirmQuit(External, Model))
+                    New UIChoice("Done Editing", Function() New MainMenu(External, Model)),
+                    New UIChoice("Directions...", Function() New EditDirections(External, Model))
                 }
         End Get
     End Property
 
     Public Overrides ReadOnly Property Lines As IEnumerable(Of String)
         Get
-            Return {"This is some text! View me and fear!"}
+            Return {
+                "Now What?"
+                }
         End Get
     End Property
 End Class
