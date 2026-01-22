@@ -1,10 +1,15 @@
 # Reimagined Waffle of SPLORR!!
 
+* Direction
+* Door
+* Item
+* Character
+* Trap
 * Rooms
-    * Traps
+    * Trap Ids
     * Exits
-        * Direction!
-        * Door
-        * Lock
-    * Creatures
-    * Items
+        * Direction Id
+        * Door Id
+        * Lock Id
+    * Creature Ids
+    * Item Ids

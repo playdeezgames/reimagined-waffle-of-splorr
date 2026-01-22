@@ -9,6 +9,7 @@ Friend Class EditWorldUI
         MyBase.New(controls, model, "Editor", CGAHue.CYAN, New PickerMenu(MainMenuUI.Launch(controls, model)))
         _menu.AddChoice("Go Back", MainMenuUI.Launch(controls, model))
         _menu.AddChoice("Directions...", EditDirectionsMenuUI.Launch(controls, model))
+        _menu.AddChoice("Portals...", EditPortalsMenuUI.Launch(controls, model))
     End Sub
 
     Protected Overrides ReadOnly Property font As IFont
