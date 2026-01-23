@@ -5,7 +5,7 @@ Friend Class ConfirmQuit
     Inherits UIBase
 
     Public Sub New(external As IExternal, model As IWorldModel)
-        MyBase.New(external, model)
+        MyBase.New(external, model, Array.Empty(Of IUIParameter))
     End Sub
 
     Public Overrides ReadOnly Property Title As String
@@ -26,12 +26,6 @@ Friend Class ConfirmQuit
     Public Overrides ReadOnly Property Lines As IEnumerable(Of String)
         Get
             Return {"Are you sure you want to quit?"}
-        End Get
-    End Property
-
-    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
-        Get
-            Return Array.Empty(Of IUIParameter)
         End Get
     End Property
 End Class

@@ -7,10 +7,9 @@ Friend Class AddPortal
     Private Const PORTAL_NAME As String = "PortalName"
 
     Public Sub New(external As IExternal, model As IWorldModel)
-        MyBase.New(external, model)
-        Parameters = {
+        MyBase.New(external, model, {
                 New UIParameter(PORTAL_NAME, "Portal Name:", "New Portal")
-                }
+                })
     End Sub
 
     Public Overrides ReadOnly Property Title As String
@@ -23,7 +22,7 @@ Friend Class AddPortal
         Get
             Return {
                 New UIChoice("Confirm", Function()
-                                            Dim portal = Model.Portals.Create(Parameters.Single(Function(x) x.Identifier = PORTAL_NAME).Value)
+                                            Dim portal = Model.Portals.Create(GetParameter(PORTAL_NAME).Value)
                                             Return New EditPortals(External, Model)
                                         End Function),
                 New UIChoice("Cancel", Function() New EditPortals(External, Model))
@@ -36,6 +35,4 @@ Friend Class AddPortal
             Return Array.Empty(Of String)
         End Get
     End Property
-
-    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
 End Class

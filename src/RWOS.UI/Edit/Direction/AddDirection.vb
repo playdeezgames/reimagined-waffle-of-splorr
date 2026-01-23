@@ -7,10 +7,9 @@ Friend Class AddDirection
     Private Const DIRECTION_NAME As String = "DirectionName"
 
     Public Sub New(external As IExternal, model As IWorldModel)
-        MyBase.New(external, model)
-        Parameters = {
+        MyBase.New(external, model, {
                 New UIParameter(DIRECTION_NAME, "Direction Name:", "New Direction")
-                }
+                })
     End Sub
 
     Public Overrides ReadOnly Property Title As String
@@ -23,7 +22,7 @@ Friend Class AddDirection
         Get
             Return {
                 New UIChoice("Confirm", Function()
-                                            Dim direction = Model.Directions.Create(Parameters.Single(Function(x) x.Identifier = DIRECTION_NAME).Value)
+                                            Dim direction = Model.Directions.Create(GetParameter(DIRECTION_NAME).Value)
                                             Return New EditDirections(External, Model)
                                         End Function),
                 New UIChoice("Cancel", Function() New EditDirections(External, Model))
@@ -36,6 +35,4 @@ Friend Class AddDirection
             Return Array.Empty(Of String)
         End Get
     End Property
-
-    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
 End Class

@@ -8,9 +8,8 @@ Friend Class EditPortal
     Const PORTAL_NAME = "PortalName"
 
     Public Sub New(external As IExternal, portal As IPortalModel)
-        MyBase.New(external, portal.Model)
+        MyBase.New(external, portal.Model, {New UIParameter(PORTAL_NAME, "Portal Name:", portal.Name)})
         Me.portal = portal
-        Me.Parameters = {New UIParameter(PORTAL_NAME, "Portal Name:", portal.Name)}
     End Sub
 
     Public Overrides ReadOnly Property Title As String
@@ -23,7 +22,7 @@ Friend Class EditPortal
         Get
             Return {
                 New UIChoice("Apply", Function()
-                                          portal.Name = Parameters.Single(Function(x) x.Identifier = PORTAL_NAME).Value
+                                          portal.Name = GetParameter(PORTAL_NAME).Value
                                           Return New EditDirections(External, Model)
                                       End Function),
                 New UIChoice("Cancel", Function() New EditDirections(External, Model))
@@ -36,6 +35,4 @@ Friend Class EditPortal
             Return Array.Empty(Of String)
         End Get
     End Property
-
-    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
 End Class
