@@ -20,13 +20,20 @@ Friend Class EditLocation
 
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
-            Return {
+            Dim result As New List(Of IUIChoice) From {
                 New UIChoice("Apply", Function()
                                           location.Name = GetParameter(LOCATION_NAME).Value
                                           Return New EditLocations(External, Model)
                                       End Function),
                 New UIChoice("Cancel", Function() New EditLocations(External, Model))
                 }
+            If location.CanDelete Then
+                result.Add(New UIChoice("Delete", Function()
+                                                      location.Delete()
+                                                      Return New EditLocations(External, Model)
+                                                  End Function))
+            End If
+            Return result
         End Get
     End Property
 

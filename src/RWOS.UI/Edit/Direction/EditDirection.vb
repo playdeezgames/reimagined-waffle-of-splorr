@@ -20,13 +20,20 @@ Friend Class EditDirection
 
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
-            Return {
+            Dim result As New List(Of IUIChoice) From {
                 New UIChoice("Apply", Function()
                                           direction.Name = GetParameter(DIRECTION_NAME).Value
                                           Return New EditDirections(External, Model)
                                       End Function),
                 New UIChoice("Cancel", Function() New EditDirections(External, Model))
                 }
+            If direction.CanDelete Then
+                result.Add(New UIChoice("Delete", Function()
+                                                      direction.Delete()
+                                                      Return New EditDirections(External, Model)
+                                                  End Function))
+            End If
+            Return result
         End Get
     End Property
 

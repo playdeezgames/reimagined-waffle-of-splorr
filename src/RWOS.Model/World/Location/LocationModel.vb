@@ -14,6 +14,10 @@ Friend Class LocationModel
         Me.data = data
     End Sub
 
+    Public Sub Delete() Implements ILocationModel.Delete
+        data.Locations.Remove(Id)
+    End Sub
+
     Public ReadOnly Property Id As Guid Implements ILocationModel.Id
 
     Public Property Name As String Implements ILocationModel.Name
@@ -28,6 +32,12 @@ Friend Class LocationModel
     Public ReadOnly Property Model As IWorldModel Implements ILocationModel.Model
         Get
             Return New WorldModel(data)
+        End Get
+    End Property
+
+    Public ReadOnly Property CanDelete As Boolean Implements ILocationModel.CanDelete
+        Get
+            Return True
         End Get
     End Property
 End Class

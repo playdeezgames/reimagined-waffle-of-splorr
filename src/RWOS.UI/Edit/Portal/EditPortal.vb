@@ -20,13 +20,21 @@ Friend Class EditPortal
 
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
-            Return {
-                New UIChoice("Apply", Function()
-                                          portal.Name = GetParameter(PORTAL_NAME).Value
-                                          Return New EditDirections(External, Model)
-                                      End Function),
-                New UIChoice("Cancel", Function() New EditDirections(External, Model))
+            Dim result As New List(Of IUIChoice) From
+                {
+                    New UIChoice("Apply", Function()
+                                              portal.Name = GetParameter(PORTAL_NAME).Value
+                                              Return New EditPortals(External, Model)
+                                          End Function),
+                    New UIChoice("Cancel", Function() New EditPortals(External, Model))
                 }
+            If portal.CanDelete Then
+                result.Add(New UIChoice("Delete", Function()
+                                                      portal.Delete()
+                                                      Return New EditPortals(External, Model)
+                                                  End Function))
+            End If
+            Return result
         End Get
     End Property
 

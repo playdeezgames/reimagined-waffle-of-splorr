@@ -16,6 +16,10 @@ Friend Class DirectionModel
         Me.id = id
     End Sub
 
+    Public Sub Delete() Implements IDirectionModel.Delete
+        data.Directions.Remove(Id)
+    End Sub
+
     Public ReadOnly Property Id As Guid Implements IDirectionModel.Id
 
     Public Property Name As String Implements IDirectionModel.Name
@@ -30,6 +34,12 @@ Friend Class DirectionModel
     Public ReadOnly Property Model As IWorldModel Implements IDirectionModel.Model
         Get
             Return New WorldModel(data)
+        End Get
+    End Property
+
+    Public ReadOnly Property CanDelete As Boolean Implements IDirectionModel.CanDelete
+        Get
+            Return True
         End Get
     End Property
 End Class
