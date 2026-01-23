@@ -1,7 +1,7 @@
 ﻿Imports RWOS.Model
 Imports TGGD.UI
 
-Friend Class EditWorld
+Friend Class EditPortals
     Inherits UIBase
 
     Public Sub New(external As IExternal, model As IWorldModel)
@@ -10,17 +10,23 @@ Friend Class EditWorld
 
     Public Overrides ReadOnly Property Title As String
         Get
-            Return "World Editor"
+            Return "Edit Portals"
         End Get
     End Property
 
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
-            Return {
-                    New UIChoice("Done Editing", Function() New MainMenu(External, Model)),
-                    New UIChoice("Directions...", Function() New EditDirections(External, Model)),
-                    New UIChoice("Portals...", Function() New EditPortals(External, Model))
+            Dim result As New List(Of IUIChoice) From
+                {
+                    New UIChoice("Done", Function() New EditWorld(External, Model)),
+                    New UIChoice("Create...", Function() New AddPortal(External, Model))
                 }
+            result.AddRange(
+                Model.Portals.All.Select(
+                    Function(x) New UIChoice(
+                        x.Name,
+                        Function() New EditPortal(External, x))))
+            Return result
         End Get
     End Property
 
