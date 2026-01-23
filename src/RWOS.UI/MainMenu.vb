@@ -28,4 +28,10 @@ Public Class MainMenu
             Return {"This is some text! View me and fear!"}
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
+        Get
+            Return Array.Empty(Of IUIParameter)
+        End Get
+    End Property
 End Class

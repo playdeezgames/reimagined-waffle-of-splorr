@@ -16,9 +16,17 @@ Friend Class EditDirections
 
     Public Overrides ReadOnly Property Choices As IEnumerable(Of IUIChoice)
         Get
-            Return {
-                New UIChoice("Done", Function() New EditWorld(External, Model))
+            Dim result As New List(Of IUIChoice) From
+                {
+                    New UIChoice("Done", Function() New EditWorld(External, Model)),
+                    New UIChoice("Create...", Function() New AddDirection(External, Model))
                 }
+            result.AddRange(
+                Model.Directions.All.Select(
+                    Function(x) New UIChoice(
+                        x.Name,
+                        Function() New EditDirection(External, x))))
+            Return result
         End Get
     End Property
 
@@ -27,6 +35,12 @@ Friend Class EditDirections
             Return {
                 "Now What?"
                 }
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
+        Get
+            Return Array.Empty(Of IUIParameter)
         End Get
     End Property
 End Class

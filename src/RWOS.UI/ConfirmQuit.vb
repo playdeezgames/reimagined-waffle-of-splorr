@@ -28,4 +28,10 @@ Friend Class ConfirmQuit
             Return {"Are you sure you want to quit?"}
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
+        Get
+            Return Array.Empty(Of IUIParameter)
+        End Get
+    End Property
 End Class

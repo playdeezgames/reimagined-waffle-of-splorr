@@ -1,6 +1,5 @@
 ﻿Public Interface IWorldModel
-    ReadOnly Property Images As IImagesModel
-    ReadOnly Property LocationTypes As ILocationTypesModel
+    ReadOnly Property Directions As IDirectionsModel
     Function Export() As String
     Sub Import(data As String)
 End Interface

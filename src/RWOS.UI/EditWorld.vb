@@ -30,4 +30,10 @@ Friend Class EditWorld
                 }
         End Get
     End Property
+
+    Public Overrides ReadOnly Property Parameters As IEnumerable(Of IUIParameter)
+        Get
+            Return Array.Empty(Of IUIParameter)
+        End Get
+    End Property
 End Class

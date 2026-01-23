@@ -13,35 +13,46 @@ Public Module Host
             app.Init()
             While ui IsNot Nothing
                 Using window = New Window With {.Title = ui.Title}
-                    Dim previousView As View = Nothing
+                    Dim x As Pos = 1
+                    Dim y As Pos = 1
                     For Each line In ui.Lines
                         Dim label As New Label() With
                             {
-                                .Text = line
+                                .Text = line,
+                                .X = x,
+                                .Y = y
                             }
-                        If previousView IsNot Nothing Then
-                            label.X = Pos.Left(previousView)
-                            label.Y = Pos.Bottom(previousView) + 1
-                        Else
-                            label.X = 1
-                            label.Y = 1
-                        End If
-                        previousView = label
+                        y = Pos.Bottom(label) + 1
                         window.Add(label)
+                    Next
+                    For Each parameter In ui.Parameters
+                        Dim label As New Label() With
+                            {
+                                .Text = parameter.LabelText,
+                                .X = x,
+                                .Y = y
+                            }
+                        y = Pos.Bottom(label) + 1
+                        Dim textField As New TextField() With
+                            {
+                                .X = Pos.Right(label) + 1,
+                                .Y = Pos.Top(label),
+                                .Width = [Dim].Fill,
+                                .Text = parameter.Value
+                            }
+                        AddHandler textField.TextChanged, Sub(s, e)
+                                                              parameter.Value = textField.Text
+                                                          End Sub
+                        window.Add(label, textField)
                     Next
                     For Each choice In ui.Choices
                         Dim button As New Button() With
                         {
-                            .Text = choice.Text
+                            .Text = choice.Text,
+                            .X = x,
+                            .Y = y
                         }
-                        If previousView IsNot Nothing Then
-                            button.X = Pos.Left(previousView)
-                            button.Y = Pos.Bottom(previousView) + 1
-                        Else
-                            button.X = 1
-                            button.Y = 1
-                        End If
-                        previousView = button
+                        y = Pos.Bottom(button) + 1
                         AddHandler button.Accepting, Sub(s, e)
                                                          ui = choice.Choose()
                                                          app.RequestStop()

@@ -4,19 +4,13 @@ Imports RWOS.Data
 Public Class WorldModel
     Implements IWorldModel
     Private data As WorldData
-    Sub New()
-        data = New WorldData
+    Sub New(data As WorldData)
+        Me.data = data
     End Sub
 
-    Public ReadOnly Property Images As IImagesModel Implements IWorldModel.Images
+    Public ReadOnly Property Directions As IDirectionsModel Implements IWorldModel.Directions
         Get
-            Return New ImagesModel(data)
-        End Get
-    End Property
-
-    Public ReadOnly Property LocationTypes As ILocationTypesModel Implements IWorldModel.LocationTypes
-        Get
-            Return New LocationTypesModel(data)
+            Return New DirectionsModel(data)
         End Get
     End Property
 
