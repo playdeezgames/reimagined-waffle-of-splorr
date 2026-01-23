@@ -24,7 +24,7 @@ Friend Class AddDirection
             Return {
                 New UIChoice("Confirm", Function()
                                             Dim direction = Model.Directions.Create(Parameters.Single(Function(x) x.Identifier = DIRECTION_NAME).Value)
-                                            Return New EditDirection(External, direction)
+                                            Return New EditDirections(External, Model)
                                         End Function),
                 New UIChoice("Cancel", Function() New EditDirections(External, Model))
                 }
